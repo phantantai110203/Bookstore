@@ -1,0 +1,17 @@
+B1:tao database trong mysql tên là bookstore
+ mở terminal
+ chay câu lệnh
+php artisan migrate:fresh
+sau đó tạo file seeder
+chạy file seeder
+
+
+
+
+
+
+
+
+
+
+test cccccccccccccc
