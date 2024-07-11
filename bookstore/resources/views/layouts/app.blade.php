@@ -68,6 +68,11 @@
                         </ul>
                     </li> --}}
                     </ul>
+                     <form action="" class="d-flex w-50">
+                        <input class="form-control me-2" name="key" type="search" placeholder="Tìm kiếm"
+                            aria-label="Search" value="{{ request()->key }}">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
                     <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                         @if (Auth::check())
                             <li class="nav-item">
@@ -90,11 +95,7 @@
 
                     </form> --}}
 
-                    <form action="" class="d-flex">
-                        <input class="form-control me-2" name="key" type="search" placeholder="Tìm kiếm"
-                            aria-label="Search" value="{{ request()->key }}">
-                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                    </form>
+
 
                     <ul class="navbar-nav  mb-2 mb-lg-0 mr-auto">
                         @if (Auth::check())

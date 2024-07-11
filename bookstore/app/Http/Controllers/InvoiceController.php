@@ -7,6 +7,7 @@ use App\Models\Invoice;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Cart;
+use App\Models\Book;
 use App\Models\InvoiceDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,17 +18,15 @@ class InvoiceController extends Controller
 
     public function index()
     {
-        $user_id = Auth::id();
-        $carts = Cart::where('user_id', $user_id)->get();
-        $total = 0;
+        $userId = auth()->user()->id;
+        $carts = Cart::where('user_id', $userId)->get();
+        $books = Book::orderBy('name', 'ASC')->get();
+        $total = $carts->sum(function ($cart) {
+            return $cart->price * $cart->quantity;
+        });
 
-        foreach($carts as $cart)
-        {
-            $total += $cart->quantity * $cart->price;
-
-        }
-        return view('pages.invoice', ['total' => $total]);
-    } 
+        return view('pages.invoice', compact('carts', 'books', 'total'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -45,18 +44,15 @@ class InvoiceController extends Controller
         $request->validate([
 
             'name' => 'required|string',
-            'addressSelect' => 'required|string',
+
             'ShippingAddress' => 'required|string',
             'ShippingPhone' => 'required|string',
             // Add more validation rules as needed
         ]);
-        // $arr = [
-        //     $request->provinceSelect, $request->districtSelect, $request->wardSelect
-        // ];
         $total = $request->input('total');
         $name = $request->input('name');
         $ShippingPhone = $request->input('ShippingPhone');
-        $ShippingAddress = $request->input('ShippingAddress') . ', ' . $request->input('addressSelect');
+        $ShippingAddress = $request->input('ShippingAddress');
         $userId = auth()->user()->id; // Lấy ID của người dùng đã đăng nhập
 
 
@@ -74,7 +70,6 @@ class InvoiceController extends Controller
 
         foreach ($carts as $cart) {
             $total += $cart->quantity * $cart->price;
-
         }
         // Set Total to 1
         $invoice->total = $total;
@@ -82,6 +77,8 @@ class InvoiceController extends Controller
 
 
         $invoice->save();
+        
+
 
 
         return redirect()->back()->with('success', 'book added to cart successfully.');

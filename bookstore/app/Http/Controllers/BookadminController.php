@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateBookRequest;
 use App\Models\Category;
 use App\Models\Author;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 
 class BookadminController extends Controller
@@ -28,6 +29,7 @@ class BookadminController extends Controller
     {
         $lst = Book::all();
 
+
         foreach ($lst as $p) {
             $this->fixImage($p);
         }
@@ -46,6 +48,9 @@ class BookadminController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
+
+
+
 
 
         //

@@ -19,7 +19,7 @@ class UserController extends Controller
     }
     public function index(){
         $lst=User::paginate();
-        return view('admin.users-index', compact('lst'))->with('i',(request()->input('page',1)-1)*5);
+        return view('admin.users-index', compact('lst'))->with('i',(request()->input('page',1)-1)*50);
 
     }
 
@@ -43,7 +43,7 @@ class UserController extends Controller
             'address' => $request->address,
             'password' => $request->merge(['password' => Hash::make($request->password)]),
             'phone' => $request->phone,
-            'role' => $request->role,
+            'role' => '1',
         ]);
 
 

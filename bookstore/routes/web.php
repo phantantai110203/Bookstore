@@ -104,8 +104,11 @@ Route::get('/invoice', function () {
     return view('pages.invoice');
 });
 
+
 Route::get('/invoice', [InvoiceController::class, 'index'])->name('index.invoice');
 Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
+Route::post('/invoice', [InvoiceController::class, 'create']);
+Route::resource('/invoices', InvoiceController::class);
 
 
 

@@ -5,11 +5,11 @@
 @section('navbar')
     @parent
 
-    <form method="POST" action="{{ route('invoice.store') }}">
+    <form method="POST" action="{{ route('invoices.store') }}">
         @csrf
         <div class="container invoice mt-5">
             <div class="row ">
-                <div class="col-md-8 order-md-1">
+                <div class="col-md-4 order-md-1">
                     <h4 class="mb-3" style="margin-top: 20px;">Địa chỉ thanh toán</h4>
                     <form class="needs-validation" novalidate>
                         <div class="row">
@@ -41,7 +41,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
                                 </div>
-                                <input type="text" name="name" class="form-control" id="username"
+                                <input type="text" name="name" class="form-control" id="username" value="{{ Auth::user()->name }}"
                                     placeholder="Tên tài khoản!" required>
                                 <div class="invalid-feedback" style="width: 100%;">
                                     Your username is required.
@@ -50,22 +50,22 @@
                         </div>
                         <div class="mb-3">
                             <label for="email">Email(*) <span class="text-muted"></span></label>
-                            <input type="email" name="user_email" class="form-control" id="email"
+                            <input type="email"  name="user_email" class="form-control" id="email" value="{{ Auth::user()->email }}"
                                 placeholder=" Vui lòng nhập email! ">
                             <div class="invalid-feedback">
                                 Please enter a valid email address shipping updates.
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="address">Địa chỉ nhà(*)</label>
-                            <input type="text" name="ShippingAddress" class="form-control" id="address"
+<label for="address">Địa chỉ nhà(*)</label>
+                            <input type="text" name="ShippingAddress" class="form-control" id="address" value="{{ Auth::user()->address }}"
                                 placeholder="Vui lòng nhập địa chỉ!" required>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="phone">Số điện thoại(*) <span class="text-muted" ></span></label>
+                            <label for="phone">Số điện thoại(*) <span class="text-muted"></span></label>
                             <input type="number" name="ShippingPhone" class="form-control" id="phone"
                                 placeholder="---">
                         </div>
@@ -93,130 +93,80 @@
                         <input type="hidden" name="addressSelect" id="addressSelect">
                     </form>
                 </div>
+                <div class="col-md-8 order-md-1">
+                    <div class="container" style="margin-top: 65px">
+                        <h4 class="mb-3" style="margin-top: 20px;">Chi tiết đơn hàng</h4>
+                        <table id="cart" class="table table-hover  table-condensed">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%">Tên sản phẩm</th>
+                                    <th style="width:10%">Giá</th>
+                                    <th style="width:15%">Số lượng</th>
+                                    <th style="width:20%" class="text-center">Thành tiền</th>
+<th style="width:5%"> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $total = 0; // Khởi tạo biến tổng tiền
+                                @endphp
+                                @foreach ($carts as $cart)
+                                    @foreach ($books as $p)
+                                        <tr>
+                                            @if ($cart->book_id == $p->id)
+                                                <td data-th="Product">
+                                                    <div class="row">
+                                                        <div class="col-sm-2 hidden-xs  "><img src="{{ $p->img }}"
+                                                                alt="Sản phẩm 1" class="img-responsive" width="100">
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <h4 class="nomargin" style="margin-left: 80px;">
+                                                                {{ $p->name }}</h4>
+                                                            {{-- <p>{{ $p->description }}</p> --}}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td data-th="Price">{{ number_format($cart->price, 0, ',', '.') }} VND</td>
+                                                <td data-th="Quantity">
+                                                        <input class="form-control text-center" name="quantity"
+                                                            value="{{ $cart->quantity }}" type="number" min="0"
+                                                            style="width: 60px;" readonly>
+
+                                                    </form>
+                                                </td>
+
+                                                <td data-th="Subtotal" class="text-center">
+                                                    {{ number_format($cart->price * $cart->quantity, 0, ',', '.') }} VND</td>
+                                                @php
+                                                    $total += $cart->price * $cart->quantity; // Cộng giá trị thành tiền vào tổng tiền
+                                                @endphp
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                @endforeach
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+{{-- <td class="hidden-xs text-center"><strong>Tổng tiền <span
+                                                id="total-amount">{{ number_format($total, 0, ',', '.') }}
+                                                VND</span></strong></td> --}}
+                                    {{-- <td>
+                                        <a href="{{ route('index.invoice') }}" class="btn btn-success btn-block">
+                                            Thanh toán <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </td> --}}
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </form>
-    {{-- <script>
-        let provinceSelect = document.getElementById('provinceSelect');
-        let districtSelect = document.getElementById('districtSelect');
-        let wardSelect = document.getElementById('wardSelect');
-        let provinceActive;
-        let districtActive;
-        let wardActive;
-        async function getALLProvinces() {
-            let provinces = [];
-            await fetch('https://vnprovinces.pythonanywhere.com/api/provinces/?basic=true&limit=100')
-                .then(res => res.json())
-                .then(data => {
-                    provinces = data.results;
-                })
-                .catch(err => console.console.error(err));
-            return provinces;
-        }
-        async function getALLDistricts(provinceId) {
-            let districts = [];
-            await fetch(
-                    `https://vnprovinces.pythonanywhere.com/api/districts/?province_id=${provinceId}&basic=true&limit=100`
-                )
-                .then(res => res.json())
-                .then(data => {
-                    districts = data.results;
-                })
-                .catch(err => console.console.error(err));
-            return districts;
-        }
-        async function getALLWards(districtId) {
-            let wards = [];
-            await fetch(
-                    `https://vnprovinces.pythonanywhere.com/api/wards/?district_id=${districtId}&basic=true&limit=100`)
-                .then(res => res.json())
-                .then(data => {
-                    wards = data.results;
-                })
-                .catch(err => console.console.error(err));
-            return wards;
-        }
-        async function loadDataProvinces() {
-            let provinces = await getALLProvinces();
-            let optionsHTML = '';
-            provinces?.forEach((item, index) => {
-                if (index === 0) {
-                    provinceActive = item.id
-                    optionsHTML += `<option selected value="${item.id}">${item.name}</option>`;
-                } else {
-                    optionsHTML += `<option value="${item.id}">${item.name}</option>`;
-                }
-            })
-            provinceSelect.innerHTML = optionsHTML;
-            await loadDataDistricts(provinceActive);
-            loadDataWards(districtActive);
-        }
-        async function loadDataDistricts(provinceId) {
-            let districts = await getALLDistricts(provinceId);
-            let optionsHTML = '';
-            districts?.forEach((item, index) => {
-                if (index === 0) {
-                    districtActive = item.id;
-                    optionsHTML += `<option selected value="${item.id}">${item.full_name}</option>`;
-                } else {
-                    optionsHTML += `<option value="${item.id}">${item.full_name}</option>`;
-                }
-            })
-            districtSelect.innerHTML = optionsHTML;
-        }
-        async function loadDataWards(districtId) {
-            let wards = await getALLWards(districtId);
-            let optionsHTML = '';
-            wards?.forEach((item, index) => {
-                if (index === 0) {
-                    optionsHTML += `<option selected value="${item.id}">${item.full_name}</option>`;
-                } else {
-                    optionsHTML += `<option value="${item.id}">${item.full_name}</option>`;
-                }
-            })
-            wardSelect.innerHTML = optionsHTML;
-            AddressSelectString();
-        }
-        loadDataProvinces();
-        provinceSelect.onchange = function() {
-            handleProvinceChange();
-        };
-        districtSelect.onchange = function() {
-            handleDistrictChange();
-        };
-        wardSelect.onchange = function() {
-            handleWardChange();
-        };
 
-        async function handleProvinceChange() {
-            let selectedOption = provinceSelect.options[provinceSelect.selectedIndex];
-            provinceActive = selectedOption.value;
-            await loadDataDistricts(provinceActive);
-            loadDataWards(districtActive);
-            AddressSelectString()
-        }
-
-        async function handleDistrictChange() {
-            let selectedOption = districtSelect.options[districtSelect.selectedIndex];
-            districtActive = selectedOption.value;
-            await loadDataWards(districtActive);
-            AddressSelectString()
-        }
-
-        function handleWardChange() {
-            let selectedOption = wardSelect.options[wardSelect.selectedIndex];
-            wardActive = selectedOption.value;
-            AddressSelectString()
-        }
-
-        function AddressSelectString() {
-            let selectedOptionProvince = provinceSelect.options[provinceSelect.selectedIndex];
-            let selectedOptionDistrict = districtSelect.options[districtSelect.selectedIndex];
-            let selectedOptionWard = wardSelect.options[wardSelect.selectedIndex];
-            let selectedOptionText = selectedOptionWard.text + ', ' + selectedOptionDistrict.text + ', ' + selectedOptionProvince.text;
-            document.getElementById('addressSelect').value = selectedOptionText;
-        }
-    </script> --}}
     <script>
         function handleAddToInvoice(event) {
 
