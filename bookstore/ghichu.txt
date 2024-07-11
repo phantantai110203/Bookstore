@@ -1,0 +1,22 @@
+composer update --no-scripts
+php artisan cache:clear
+php artisan config:clear
+php artisan key:generate
+
+<button id="myButton">Cập nhật nội dung</button>
+
+<div id="myContent"></div>
+
+<script>
+$(document).ready(function(){
+  $("#myButton").click(function(){
+    $.ajax({
+      url: "data.php",
+      method: "GET",
+      success: function(data){
+        $("#myContent").html(data);
+      }
+    });
+  });
+});
+</script>
