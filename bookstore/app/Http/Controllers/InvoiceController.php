@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Data;
 use App\Models\Invoice;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Cart;
-use App\Models\Book;
 use App\Models\InvoiceDetail;
+use App\Policies\InvoiceDetailPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,7 @@ class InvoiceController extends Controller
         return view('pages.invoice', compact('carts', 'books', 'total'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -42,28 +44,68 @@ class InvoiceController extends Controller
     {
         // Validate the form data
         $request->validate([
-
-            'name' => 'required|string',
-
-            'ShippingAddress' => 'required|string',
-            'ShippingPhone' => 'required|string',
-            // Add more validation rules as needed
+            'firstName' => 'required|string|max:255',
+            'user_firstName' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'user_email' => 'required|email',
+            'ShippingAddress' => 'required|string|max:255',
+            'ShippingPhone' => 'required|numeric',
+            'invoiceMethod' => 'required|string'
         ]);
-        $total = $request->input('total');
-        $name = $request->input('name');
-        $ShippingPhone = $request->input('ShippingPhone');
-        $ShippingAddress = $request->input('ShippingAddress');
-        $userId = auth()->user()->id; // Lấy ID của người dùng đã đăng nhập
-
-
+        // $total = $request->input('total');
+        // $name = $request->input('name');
+        // $ShippingPhone = $request->input('ShippingPhone');
+        // $ShippingAddress = $request->input('ShippingAddress');
+        // $userId = auth()->user()->id; // Lấy ID của người dùng đã đăng nhập
+        $status = 'Chờ xác nhận';
         $invoice = new Invoice();
 
+        $invoice->name = $request->name;
+        $invoice->ShippingAddress = $request->ShippingAddress;
+        $invoice->ShippingPhone = $request->ShippingPhone;
+        // $invoice->payment_method = $request->invoiceMethod;
+        $invoice->total = $request->total; // Make sure to pass the total amount in the form
+        $invoice->status =$status;
+        $invoice->user_id = Auth::id();
+        $invoice->save();
 
-        $invoice->user_id = $userId;
-        $invoice->name = $name;
-        $invoice->ShippingAddress = $ShippingAddress;
-        $invoice->ShippingPhone = $ShippingPhone;
-        // Tính tổng giỏ hàng
+        // lưu id vao sesstioni
+        session(['invoice_id' => $invoice->id]);
+
+
+
+
+
+
+
+        $carts = Cart::where('user_id', Auth::id())->get(); // Assuming you have a Cart model
+
+        foreach ($carts as $cart) {
+            $book = Book::find($cart->book_id); // Assuming you have a Book model
+            if ($book) {
+                $invoiceDetail = new InvoiceDetail();
+                $invoiceDetail->invoice_id = $invoice->user_id;
+                $invoiceDetail->book_id  = $book->id;
+                // $invoiceDetail->price = $cart->price;
+                $invoiceDetail->quantity = $cart->quantity;
+
+                // $invoiceDetail->subtotal = $cart->price * $cart->quantity;
+                $invoiceDetail->save();
+            }
+        }
+        Cart::where('user_id', Auth::id())->delete();
+        return redirect()->route('invoice.index')->with('success', 'Invoice created successfully!');
+
+
+
+        // $invoice = new Invoice();
+
+
+        // $invoice->user_id = $userId;
+        // $invoice->name = $name;
+        // $invoice->ShippingAddress = $ShippingAddress;
+        // $invoice->ShippingPhone = $ShippingPhone;
+        // // Tính tổng giỏ hàng
         $user_id = Auth::id();
         $carts = Cart::where('user_id', $user_id)->get();
         $total = 0;
@@ -71,17 +113,26 @@ class InvoiceController extends Controller
         foreach ($carts as $cart) {
             $total += $cart->quantity * $cart->price;
         }
-        // Set Total to 1
+
+        // Set Total to
         $invoice->total = $total;
 
 
 
         $invoice->save();
-        
+
+
+        // return redirect()->back()->with('success', 'book added to cart successfully.');
 
 
 
-        return redirect()->back()->with('success', 'book added to cart successfully.');
+    }
+    public function transactionHistory()
+    {
+        $userId = Auth::id();
+        $invoices = Invoice::where('user_id', $userId)->with('invoiceDetails.book')->get();
+
+        return view('pages.history', compact('invoices'));
     }
 
     // public function otherPage(Request $request)

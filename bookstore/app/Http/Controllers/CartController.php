@@ -133,7 +133,12 @@ class CartController extends Controller
             return redirect()->back()->with('success', 'Cart item deleted successfully');
         }
 
-        // Chuyển hướng trở lại với thông báo lỗi nếu không tìm thấy mục giỏ hàng
-        return redirect()->back()->with('error', 'Cart item not found');
+        // // Chuyển hướng trở lại với thông báo lỗi nếu không tìm thấy mục giỏ hàng
+        // return redirect()->back()->with('error', 'Cart item not found');
+        $product = Cart::findOrFail($id);
+        $product->delete();
+
+
+        return response()->json(['message' => 'Xóa sản phẩm thành công']);
     }
 }

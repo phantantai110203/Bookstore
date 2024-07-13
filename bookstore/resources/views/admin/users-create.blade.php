@@ -64,23 +64,27 @@
     </style>
 <h1 style="color: black;">Thêm tài khoản mới</h1>
    <div class="container" >
-        <h1>Thêm Sản Phẩm</h1>
         <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <label for="name">Họ tên:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" >
+            @if($errors->has('name')) {{ $errors->first('name') }} <br>@endif
 
             <label for="email:">Email:</label>
-            <input name="email" rows="3" required />
+            <input name="email" rows="3"  />
+            @if($errors->has('email')) {{ $errors->first('email') }} <br>@endif
 
             <label for="price">Mật khẩu:</label>
-            <input type="password"  name="password" step="0.01" required>
+            <input type="password"  name="password" step="0.01">
+            @if($errors->has('password')) {{ $errors->first('password') }} <br>@endif
 
             <label>Số diện thoai:</label>
             <input name="phone" step="0.01"/>
+            @if($errors->has('phone')) {{ $errors->first('phone') }} <br>@endif
 
             <label>Địa chỉ:</label>
             <input name="address" step="0.01"/>
+            @if($errors->has('address')) {{ $errors->first('address') }} <br>@endif
 
 
             <button type="submit">Thêm</button>

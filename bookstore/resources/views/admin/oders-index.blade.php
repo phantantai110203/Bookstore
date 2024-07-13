@@ -22,17 +22,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($lst as $p)
+            @foreach ($latestOrders as $p)
                 <tr>
-                    <td>{{ ++$i }}</td>
-                    <td>{{ $p->name }}</td>
-                    <td>{{ $p->ShippingAddress }}</td>
-                    <td>{{ $p->created_at }}</td>
-                    <td>{{ $p->total }}</td>
+                    @php
+                        $amount = $p['total'];
+                        $formattedAmount = number_format($amount, 2, '.', ',') . ' VNĐ';
+                    @endphp
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $p['name'] }}</td>
+                    <td>{{ $p['ShippingAddress'] }}</td>
+                    <td>{{ \Carbon\Carbon::parse($p['created_at'])->format('d/m/Y H:i:s') }}</td>
+                    <td>{{ $formattedAmount }}</td>
                     <td>
                         <form>
                             @csrf
-                            <select style="border-radius: 8px; font-family: Arial, Helvetica, sans-serif" name="status" class="status-select" data-id="{{ $p->id }}">
+                            <select style="border-radius: 8px; font-family: Arial, Helvetica, sans-serif" name="status"
+                                class="status-select" data-id="{{ $p->id }}">
                                 <option value="{{ $p->status }}">{{ $p->status }}</option>
                                 <option value="Đang chuẩn bị">Đang chuẩn bị</option>
                                 <option value="Đã huỷ">Đã huỷ</option>

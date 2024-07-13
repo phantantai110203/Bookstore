@@ -64,7 +64,7 @@ class DashboardController extends Controller
     }
     public function create()
     {
-//
+        //
     }
     public function store(StoreUserRequest $request)
     {

@@ -11,38 +11,39 @@
 
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
-            <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fas fa-user-friends fa-3x text-primary"></i>
+            <div class="col-sm-6 col-xl-3" style="background-color: rgb(50, 141, 245)">
+                <div class="rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fas fa-user-friends fa-3x " style="color: white"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Số lượng user</p>
+                        <p class="mb-2" style="color: white">Số lượng user</p>
                         <h6 class="mb-0">{{ $userCount }}</h6>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fas fa-book fa-3x text-primary"></i>
+            <div class="col-sm-6 col-xl-3" style="background-color: rgb(227, 204, 75)">
+                <div class=" rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fas fa-book fa-3x" style="color: white"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Số lượng sản phẩm</p>
+                        <p class="mb-2" style="color: white">Số lượng sản phẩm</p>
                         <h6 class="mb-0">{{ $bookCount }}</h6>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-area fa-3x text-primary"></i>
+            <div class="col-sm-6 col-xl-3" style="background-color: rgb(230, 116, 108)">
+                <div class="rounded d-flex align-items-center justify-content-between p-4">
+
+                    <i class="fas fa-truck-moving fa-3x" style="color: white"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Số lượng đơn hàng</p>
+                        <p class="mb-2" style="color: white">Số lượng đơn hàng</p>
                         <h6 class="mb-0">{{ $oderCount }}</h6>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-pie fa-3x text-primary"></i>
+            <div class="col-sm-6 col-xl-3" style="background-color: rgb(124, 201, 111)">
+                <div class="rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-pie fa-3x" style="color: white"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Total Revenue</p>
+                        <p class="mb-2" style="color: white">Tổng doanh thu</p>
                         <h6 class="mb-0">$1234</h6>
                     </div>
                 </div>
@@ -51,35 +52,37 @@
     </div>
 
     <!-- Sales Chart Start -->
-     <div class="container-fluid pt-4 px-4">
+    <div class="container-fluid pt-4 px-4">
         <div class="row g-4 justify-content-center">
             <!-- Sales Chart Start -->
             <div class="col-md-8">
-                <div class="bg-secondary text-center rounded p-4 h-100">
+                <div style="background-color: #ffffff" class="text-center rounded p-4 h-100">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Doanh thu</h6>
+                        <h6 class="mb-0" style="color: black">Doanh thu</h6>
                     </div>
-                    <canvas id="salse-revenue"></canvas>
+                    <canvas style="" id="salse-revenue"></canvas>
                 </div>
             </div>
             <!-- Sales Chart End -->
 
             <!-- Recent Orders Start -->
             <div class="col-md-4">
-                <div class="h-100 bg-secondary rounded p-4" style="max-height: 500px; overflow-y: auto;">
+                <div class="h-100 rounded p-4" style="max-height: 500px; overflow-y: auto;background-color: #ffffff;">
                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <h6 class="mb-0">10 đơn hàng gần nhất</h6>
-                        <a href="">Xem tất cả</a>
+                        <h6 class="mb-0" style="color: black">10 đơn hàng gần nhất</h6>
+                        <a style="color: black" href="{{ route('invoices.index') }}">Xem tất cả</a>
                     </div>
                     <div class="scrollable-content">
-                        @foreach($latestOrders as $order)
+                        @foreach ($latestOrders as $order)
                             <div class="d-flex align-items-center border-bottom py-3">
                                 <div class="w-100 ms-3">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">{{ $order['name'] }} - {{ $order['ShippingPhone'] }}</h6>
-                                        <small>{{ \Carbon\Carbon::parse($order['created_at'])->format('d/m/Y H:i:s') }}</small>
+                                        <h6 style="color: black" class="mb-0">{{ $order['name'] }} -
+                                            {{ $order['ShippingPhone'] }}</h6>
+                                        <small
+                                            style="color: black">{{ \Carbon\Carbon::parse($order['created_at'])->format('d/m/Y H:i:s') }}</small>
                                     </div>
-                                    <span>{{ $order['ShippingAddress'] }}</span>
+                                    <span style="color: black">{{ $order['ShippingAddress'] }}</span>
                                 </div>
                             </div>
                         @endforeach
@@ -254,18 +257,31 @@
             var myChart2 = new Chart(ctx2, {
                 type: "line",
                 data: {
-                    labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
-                    datasets: [
-                        {
-                            label: "Doanh thu",
-                            data: revenueData,
-                            backgroundColor: "rgba(235, 22, 22, .5)",
-                            fill: true
-                        }
-                    ]
+                    labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7",
+                        "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+                    ],
+                    datasets: [{
+                        label: "Doanh thu",
+                        data: revenueData,
+                        backgroundColor: "#7ebde2",
+                        fill: true,
+                        color: "black" // Màu chữ cho nhãn "Doanh thu"
+                    }]
                 },
                 options: {
-                    responsive: true
+                    responsive: true,
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: 'black', // Màu chữ của nhãn trục x
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: 'black', // Màu chữ của nhãn trục y
+                            }
+                        }
+                    }
                 }
             });
         });

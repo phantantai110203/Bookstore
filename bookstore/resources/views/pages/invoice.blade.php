@@ -5,44 +5,40 @@
 @section('navbar')
     @parent
 
-    <form method="POST" action="{{ route('invoices.store') }}">
+    <form style="margin-top:20px" method="POST" action="{{ route('invoice.store') }}" id="myForm">
         @csrf
         <div class="container invoice mt-5">
-            <div class="row ">
+            <div class="row">
                 <div class="col-md-4 order-md-1">
-                    <h4 class="mb-3" style="margin-top: 20px;">Địa chỉ thanh toán</h4>
-                    <form class="needs-validation" novalidate>
+                    <h4 class="mb-3" style="margin-top: 20px;">Địa chỉ giao hàng</h4>
+                    <div class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">Họ</label>
                                 <input type="text" name="firstName" class="form-control" id="firstName" placeholder value
                                     required>
-
-
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
-
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Tên</label>
                                 <input type="text" name="user_firstName" class="form-control" id="lastName" placeholder
                                     value required>
-
                                 <div class="invalid-feedback">
                                     Valid last name is required.
                                 </div>
-
                             </div>
                         </div>
+
                         <div class="mb-3">
                             <label for="username">Tên tài khoản(*) </label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
                                 </div>
-                                <input type="text" name="name" class="form-control" id="username" value="{{ Auth::user()->name }}"
-                                    placeholder="Tên tài khoản!" required>
+                                <input type="text" name="name" class="form-control" id="username"
+                                    value="{{ Auth::user()->name }}" placeholder="Tên tài khoản!" required>
                                 <div class="invalid-feedback" style="width: 100%;">
                                     Your username is required.
                                 </div>
@@ -50,15 +46,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="email">Email(*) <span class="text-muted"></span></label>
-                            <input type="email"  name="user_email" class="form-control" id="email" value="{{ Auth::user()->email }}"
-                                placeholder=" Vui lòng nhập email! ">
+                            <input type="email" name="user_email" class="form-control" id="email"
+                                value="{{ Auth::user()->email }}" placeholder=" Vui lòng nhập email! ">
                             <div class="invalid-feedback">
                                 Please enter a valid email address shipping updates.
                             </div>
                         </div>
                         <div class="mb-3">
-<label for="address">Địa chỉ nhà(*)</label>
-                            <input type="text" name="ShippingAddress" class="form-control" id="address" value="{{ Auth::user()->address }}"
+                            <label for="address">Địa chỉ nhà(*)</label><input type="text" name="ShippingAddress"
+                                class="form-control" id="address" value="{{ Auth::user()->address }}"
                                 placeholder="Vui lòng nhập địa chỉ!" required>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
@@ -66,10 +62,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="phone">Số điện thoại(*) <span class="text-muted"></span></label>
-                            <input type="number" name="ShippingPhone" class="form-control" id="phone"
+                            <input type="text" name="ShippingPhone" class="form-control" id="phone"
                                 placeholder="---">
                         </div>
-                        <a class="mb-3">Tổng tiền: {{ number_format($total, 0, ',', '.') }}VNĐ</a>
+                        <a class="mb-3">Tổng tiền: {{ number_format($total, 0, ',', '.') }} VNĐ</a>
+                        <input type="hidden" name="total" value="{{ $total }}">
+
+
 
                         <hr class="mb-4">
                         <h4 class="mb-3">Thanh toán</h4>
@@ -82,86 +81,85 @@
                             <div class="custom-control custom-radio">
                                 <input id="debit" name="invoiceMethod" type="radio" class="custom-control-input"
                                     required>
-                                <label class="custom-control-label" for="debit">Thanh toán qua ngân hàng</label>
+                                <label class="custom-control-label" for="debit">Thanh toán qua VNPAY</label>
+                                <a href="#" id="myLink" style="display: none;">Đây là một liên kết</a>
                             </div>
-
                         </div>
+
                         <hr class="mb-4">
-                        <button onclick="handleAddToInvoice(event)" class="btn btn-primary btn-lg btn-block mb-2"
-                            type="submit">Tiếp tục thanh
-                            toán</button>
+                        <form method="POST"  action="{{ route('invoice.store') }}">
+                            @csrf
+                            <!-- Invoice form details... -->
+                            <button onclick="handleAddToInvoice(event)" class="btn btn-primary btn-lg btn-block mb-2"
+                                type="submit">Tiếp tục
+                                thanh toán</button>
+                            {{-- <button type="button" onclick="submitAndRedirect()">Submit và Chuyển Hướng</button> --}}
+                            <input type="hidden" name="addressSelect" id="addressSelect">
+                        </form>
+                        <form action="{{ route('vnpay_payment') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="total" value="{{ $total }}">
+                            <button type="submit" name="redirect" class="btn btn-dark primary-btn invoive-btn"
+                                style="width:50%">Thanh
+                                toán VNPAY <i class="fab fa-cc-visa"></i>
+                            </button>
+                        </form>
+
                         <input type="hidden" name="addressSelect" id="addressSelect">
-                    </form>
+                    </div>
                 </div>
                 <div class="col-md-8 order-md-1">
                     <div class="container" style="margin-top: 65px">
                         <h4 class="mb-3" style="margin-top: 20px;">Chi tiết đơn hàng</h4>
-                        <table id="cart" class="table table-hover  table-condensed">
+                        <table id="cart" class="table table-hover table-condensed">
                             <thead>
                                 <tr>
                                     <th style="width:50%">Tên sản phẩm</th>
                                     <th style="width:10%">Giá</th>
                                     <th style="width:15%">Số lượng</th>
                                     <th style="width:20%" class="text-center">Thành tiền</th>
-<th style="width:5%"> </th>
+                                    <th style="width:5%"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php
-                                    $total = 0; // Khởi tạo biến tổng tiền
-                                @endphp
+                                @php $total = 0; @endphp
                                 @foreach ($carts as $cart)
                                     @foreach ($books as $p)
-                                        <tr>
-                                            @if ($cart->book_id == $p->id)
+                                        @if ($cart->book_id == $p->id)
+                                            <tr>
                                                 <td data-th="Product">
                                                     <div class="row">
-                                                        <div class="col-sm-2 hidden-xs  "><img src="{{ $p->img }}"
-                                                                alt="Sản phẩm 1" class="img-responsive" width="100">
+                                                        <div class="col-sm-2 hidden-xs">
+                                                            <img src="{{ $p->img }}" alt="Sản phẩm 1"
+                                                                class="img-responsive" width="100">
                                                         </div>
                                                         <div class="col-sm-10">
                                                             <h4 class="nomargin" style="margin-left: 80px;">
                                                                 {{ $p->name }}</h4>
-                                                            {{-- <p>{{ $p->description }}</p> --}}
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td data-th="Price">{{ number_format($cart->price, 0, ',', '.') }} VND</td>
-                                                <td data-th="Quantity">
-                                                        <input class="form-control text-center" name="quantity"
-                                                            value="{{ $cart->quantity }}" type="number" min="0"
-                                                            style="width: 60px;" readonly>
-
-                                                    </form>
+                                                <td data-th="Price">{{ number_format($cart->price, 0, ',', '.') }} VND
                                                 </td>
-
+                                                <td data-th="Quantity">
+                                                    <input class="form-control text-center" name="quantity"
+                                                        value="{{ $cart->quantity }}" type="number" min="0"
+                                                        style="width: 60px;" readonly>
+                                                </td>
                                                 <td data-th="Subtotal" class="text-center">
-                                                    {{ number_format($cart->price * $cart->quantity, 0, ',', '.') }} VND</td>
-                                                @php
-                                                    $total += $cart->price * $cart->quantity; // Cộng giá trị thành tiền vào tổng tiền
-                                                @endphp
-                                            @endif
-                                        </tr>
+                                                    {{ number_format($cart->price * $cart->quantity, 0, ',', '.') }} VND
+                                                </td>
+                                                @php $total += $cart->price * $cart->quantity; @endphp
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 @endforeach
-
                             </tbody>
                             <tfoot>
-                                <tr>
-{{-- <td class="hidden-xs text-center"><strong>Tổng tiền <span
-                                                id="total-amount">{{ number_format($total, 0, ',', '.') }}
-                                                VND</span></strong></td> --}}
-                                    {{-- <td>
-                                        <a href="{{ route('index.invoice') }}" class="btn btn-success btn-block">
-                                            Thanh toán <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </td> --}}
-                                </tr>
+                                <tr></tr>
                             </tfoot>
                         </table>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -200,6 +198,21 @@
                 event.target.closest('form').submit(); // Gửi biểu mẫu
             }
 
+        }
+    </script>
+
+    <script>
+        function submitAndRedirect() {
+            // Lấy ra form
+            var form = document.getElementById('myForm');
+
+            // Thực hiện submit form
+            form.submit();
+
+            // Chuyển hướng trang sau khi submit thành công
+            window.location.href = '{{ route('payment.index') }}';
+
+            // Lưu ý: Cần chắc chắn rằng trang mà bạn định chuyển hướng đến là một trang thực tế tồn tại và đang hoạt động.
         }
     </script>
 @endsection

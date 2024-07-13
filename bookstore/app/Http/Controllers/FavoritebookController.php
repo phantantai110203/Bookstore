@@ -75,7 +75,6 @@ class FavoritebookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
     }
 
     /**
@@ -85,8 +84,7 @@ class FavoritebookController extends Controller
     {
         $favoritebookItems = Favoritebook::where('book_id', $id)->first();
 
-        if
-        ($favoritebookItems) {
+        if ($favoritebookItems) {
             $favoritebookItems->delete();
             // Chuyển hướng trở lại bằng thông báo thành công hoặc thực hiện các hành động khác nếu cần
             return redirect()->back()->with('success', ' favoritebook Items deleted successfully');

@@ -11,7 +11,6 @@ use App\Http\Controllers\BookadminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
-
 use App\Http\Controllers\FavoritebookController;
 use App\Http\Controllers\InvoiceadminController;
 use App\Models\Payment;
@@ -38,6 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/users', UserController::class);
         Route::resource('/books', BookadminController::class);
         Route::resource('/invoices', InvoiceadminController::class);
+        Route::get('oders',[InvoiceadminController::class, 'index'])->name('oders.index');
         Route::resource('/category', CategoryController::class);
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -105,10 +105,10 @@ Route::get('/invoice', function () {
 });
 
 
-Route::get('/invoice', [InvoiceController::class, 'index'])->name('index.invoice');
+Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');
 Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
 Route::post('/invoice', [InvoiceController::class, 'create']);
-Route::resource('/invoices', InvoiceController::class);
+//Route::resource('/invoices', InvoiceController::class);
 
 
 
@@ -123,4 +123,12 @@ Route::get('slug/{slug}', function($slug){
 
 // Route::get('/invoicedetail}', function () {
 //     return view("pages.invoice-detail");
-// });
+Route::get('/transaction-history', [InvoiceController::class, 'transactionHistory'])->name('transaction.history');
+//vnpay
+Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay_payment');
+
+
+//payment
+
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');

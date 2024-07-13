@@ -8,20 +8,42 @@ use App\Http\Requests\UpdateInvoiceRequest;
 use Illuminate\Http\Request;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceadminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
     public function index()
     {
         $lst = Invoice::all();
+        $latestOrders = Invoice::orderBy('created_at', 'desc')->take(10)->get();
+        $monthlyRevenue = Invoice::select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw('SUM(total) as revenue')
+        )
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+        $revenueData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $revenueData[$i] = 0;
+        }
 
-        return view('admin.oders-index', compact('lst'))->with('i', (request()->input('page', 1) - 1) * 5);
-        //
+        return view('admin.oders-index',  [
+            'monthlyRevenue' => $revenueData,
+            'latestOrders' => $latestOrders
+        ]);
     }
+
+    // public function index()
+    // {
+    //     $lst = Invoice::all();
+
+    //     return view('admin.oders-index', compact('lst'))->with('i', (request()->input('page', 1) - 1) * 5);
+    //     //
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -97,5 +119,5 @@ class InvoiceadminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-   
+
 }

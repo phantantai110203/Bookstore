@@ -27,8 +27,7 @@
                                 <td data-th="Product">
                                     <div class="row">
                                         <div class="col-sm-2 hidden-xs  "><img src="{{ $p->img }}" alt="Sản phẩm 1"
-                                                class="img-responsive" width="100"
-                                                >
+                                                class="img-responsive" width="100">
                                         </div>
                                         <div class="col-sm-10">
                                             <h4 class="nomargin" style="margin-left: 80px;">{{ $p->name }}</h4>
@@ -43,8 +42,8 @@
                                         @csrf
                                         <input class="form-control text-center" name="quantity" value="{{ $ca->quantity }}"
                                             type="number" min="0" style="width: 60px;">
-                                        <button type="submit" class="btn btn-info btn-sm"
-                                            style="margin-left: 5px;"><i class="fa fa-save" aria-hidden="true"></i></button>
+                                        <button type="submit" class="btn btn-info btn-sm" style="margin-left: 5px;"><i
+                                                class="fa fa-save" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
 
@@ -53,10 +52,10 @@
                                 <td class="actions" data-th="">
                                     <a href="{{ route('detail.book', ['book' => $p]) }}">
                                         <button
-                                            class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i>
+class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i>
                                         </button>
                                     </a>
-                                    <form action="{{ route('cart.destroy', ['id' => $p->id]) }}" method="POST">
+                                    <form action="{{ route('cart.destroy', ['id' => $p->id]) }}" method="POST" onsubmit="handleDelete(event)">
                                         @csrf
                                         @method('DELETE')
 
@@ -66,6 +65,7 @@
                                         </button>
                                     </form>
                                 </td>
+
                                 @php
                                     $total += $ca->price * $ca->quantity; // Cộng giá trị thành tiền vào tổng tiền
                                 @endphp
@@ -73,24 +73,31 @@
                         </tr>
                     @endforeach
                 @endforeach
+
             </tbody>
             <tfoot>
                 <tr>
                     <td><a href="{{ route('index') }}" class="btn btn-success"><i class="fa fa-angle-left"></i> Tiếp tục mua
                             hàng</a>
                     </td>
+
                     <td colspan="2" class="hidden-xs"> </td>
-                    <td class="hidden-xs text-center"><strong>Tổng tiền {{ number_format($total, 0, ',', '.') }}
+                    {{-- <td class="hidden-xs text-center"><strong>Tổng tiền {{ number_format($total, 0, ',', '.') }}
                             VND</strong>
 
-                    </td>
+                    </td> --}}
+                    <td class="hidden-xs text-center"><strong>Tổng tiền <span id="total-amount">{{ number_format($total, 0, ',', '.') }} VND</span></strong></td>
+
                     <td>
-                        <a href="{{ route('index.invoice') }}" class="btn btn-success btn-block">
+                        <a href="{{ route('invoice.index') }}" class="btn btn-success btn-block">
                             Thanh toán <i class="fa fa-angle-right"></i>
                         </a>
                     </td>
                 </tr>
             </tfoot>
         </table>
+
     </div>
+
+
 @endsection

@@ -22,7 +22,18 @@ class StoreInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'ShippingPhone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             //
+        ];
+    }
+    public function messages()
+    {
+        return [
+
+            'ShippingPhone.required' => 'Số điện thoại là bắt buộc.',
+            'ShippingPhone.regex' => 'Số điện thoại không hợp lệ.',
+            'ShippingPhone.min' => 'Số điện thoại phải có ít nhất 10 ký tự.',
+
         ];
     }
 }

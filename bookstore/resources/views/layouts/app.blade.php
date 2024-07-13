@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Mô tả nội dung trang">
@@ -31,6 +32,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/js/bootstrap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v20.0"
         nonce="b8V6cTLP"></script>
 
@@ -75,6 +77,9 @@
                     </form>
                     <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                         @if (Auth::check())
+                        <li class="nav-item">
+                                <a class="nav-link bi bi-calendar-check-fill" href="{{ route('transaction.history') }}"></a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link bi bi-bag-check-fill" href="{{ route('cart.index') }}"></a>
                             </li>
@@ -179,14 +184,7 @@
                                 Đăng nhập</a></li>
                     </ul>
                 </div>
-               <div class="col">
-                     <div class="fb-page" data-href="https://www.facebook.com/tamsubuon1chut?locale=vi_VN"
-                    data-tabs="timeline" data-width="500" data-height="135" data-small-header="false"
-                    data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                    <blockquote cite="https://www.facebook.com/tamsubuon1chut?locale=vi_VN" class="fb-xfbml-parse-ignore">
-                        <a href="https://www.facebook.com/tamsubuon1chut?locale=vi_VN">Blog buồn+</a>
-                    </blockquote>
-                </div>
+               
 
             </footer>
 
@@ -195,7 +193,7 @@
                 <div class="block " id="content_FooterAddress">
                     <div class="blockcontent">
                         <div style="text-align: center;">
-                            Copyright &copy; 2014 bookstore.vn
+                            bookstore.vn
                         </div>
                         <div style="text-align: center;">
                             &nbsp;
