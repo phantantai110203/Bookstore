@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 22, 2024 lúc 03:09 AM
--- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.1.17
+-- Thời gian đã tạo: Th7 15, 2024 lúc 07:28 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -105,7 +105,7 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`id`, `name`, `description`, `publish_date`, `price`, `quality`, `img`, `created_at`, `updated_at`, `deleted_at`, `author_id`, `category_id`) VALUES
-(1, 'You Can Win - Bí Quyết Của Người Chiến Thắng (Tái Bản)', 'You Can Win - Bí Quyết Của Người Chiến Thắng .Với cách đặt vấn đề dễ hiểu, thiết thực và sâu sắc, <strong>Bí quyết của người chiến thắng sẽ giúp bạn tránh rơi vào cảm giác mất phương hướng, biết xác định mục tiêu và những giá trị cần ưu tiên trong cuộc sống. Có  thể xem cuốn sách này như một quyển sổ tay liệt kê những công cụ cần  thiết để kiến tao thành công và giúp bạn tạo lập một cuộc sống tốt đẹp.  Cũng có thể xem nó như một cuốn cảm nang dạy nấu ăn, bao gồm những chỉ  dần về nguyên liệu, công thức và cách pha trộn theo tỉ lệ thích hợp để  có được thành công. Nhưng  trên hết, đây là cuốn sách từng bước dẫn dặt bạn đi từ mơ ước, khát vọng  thành công đến khám phá năng lực của bản thân và biến ước mơ thành hiện  thực .Bí  quyết sẽ giúp bạn xây dựng mục tiêu mới, hình thành ý niệm mới về mục  đích sống, phát triển tư tưởng mới về bản thân và tương lai. Một  trong những mục đích của cuốn sách là giúp bạn đề ra kế hoạch hành động  cho tương lai. Nếu chưa bao giờ làm vậy, bạn hãy xác định xem- Bạn muốn đạt được điều gì? - Bạn muốn đạt được mục tiêu bằng cách nào?- Thời điểm bạn muốn đạt được mục tiêu là khi nào? Những  nguyên tắc trình bày trong cuốn sách đều mang tính phổ quát, áp dụng cho  mọi tình huống, tổ chức hoặc quốc gia. Hy vọng cuốn sách sẽ mang lại  cho bạn nhiều điều mới mẻ v&agragrave; những khám phá thú vị.', '2015-12-14', 120000, 86, '/asset/img/f543773110ede6e472494f5e9aed4253.jpg', '2017-05-27 07:40:25', '2017-05-27 07:40:25', NULL, 1, 1),
+(1, 'You Can Win - Bí Quyết Của Người Chiến Thắng (Tái Bản)', 'You Can Win - Bí Quyết Của Người Chiến Thắng .Với cách đặt vấn đề dễ hiểu, thiết thực và sâu sắc, <strong>Bí quyết của người chiến thắng sẽ giúp bạn tránh rơi vào cảm giác mất phương hướng, biết xác định mục tiêu và những giá trị cần ưu tiên trong cuộc sống. Có  thể xem cuốn sách này như một quyển sổ tay liệt kê những công cụ cần  thiết để kiến tao thành công và giúp bạn tạo lập một cuộc sống tốt đẹp.  Cũng có thể xem nó như một cuốn cảm nang dạy nấu ăn, bao gồm những chỉ  dần về nguyên liệu, công thức và cách pha trộn theo tỉ lệ thích hợp để  có được thành công. Nhưng  trên hết, đây là cuốn sách từng bước dẫn dặt bạn đi từ mơ ước, khát vọng  thành công đến khám phá năng lực của bản thân và biến ước mơ thành hiện  thực .Bí  quyết sẽ giúp bạn xây dựng mục tiêu mới, hình thành ý niệm mới về mục  đích sống, phát triển tư tưởng mới về bản thân và tương lai. Một  trong những mục đích của cuốn sách là giúp bạn đề ra kế hoạch hành động  cho tương lai. Nếu chưa bao giờ làm vậy, bạn hãy xác định xem- Bạn muốn đạt được điều gì? - Bạn muốn đạt được mục tiêu bằng cách nào?- Thời điểm bạn muốn đạt được mục tiêu là khi nào? Những  nguyên tắc trình bày trong cuốn sách đều mang tính phổ quát, áp dụng cho  mọi tình huống, tổ chức hoặc quốc gia. Hy vọng cuốn sách sẽ mang lại  cho bạn nhiều điều mới mẻ v&agragrave; những khám phá thú vị.', '2015-12-14', 120000, 86, 'upload/book/1/k5xoyFauXZy69gqppyPqxUkrp7HAtvJPcJ2yfihT.png', '2017-05-27 07:40:25', '2024-07-15 03:41:44', NULL, 1, 1),
 (2, 'Thám tử lừng danh conan - Tập 89', 'Thám tử lừng danh Conan là một series manga trinh thám được sáng tác bởi Aoyama Gōshō. Tác phẩm được đăng tải trên tạp chí Weekly Shōnen Sunday của nhà xuất bản Shogakukan vào năm 1994 và được đóng gói thành 104 tập tankōbon tính đến tháng 10 năm 2023', '1994-01-19', 58000, 26, '/asset/img/conan89.u2469.d20160901.t170642.630976.jpg', '2023-12-12 07:40:25', '2023-12-12 07:40:25', NULL, 2, 2),
 (3, 'Thám tử lừng danh conan - Tập 87', 'Thám tử lừng danh Conan là một series manga trinh thám được sáng tác bởi Aoyama Gōshō. Tác phẩm được đăng tải trên tạp chí Weekly Shōnen Sunday của nhà xuất bản Shogakukan vào năm 1994 và được đóng gói thành 104 tập tankōbon tính đến tháng 10 năm 2023', '1994-01-19', 56000, 31, '/asset/img/conan-87-u335-d20160516-t151643.u2487.d20161019.t142926.381590.jpg', '2023-12-12 07:40:25', '2024-01-12 08:08:58', NULL, 2, 2),
 (4, 'Thám tử lừng danh conan - Tập 90', 'Thám tử lừng danh Conan là một series manga trinh thám được sáng tác bởi Aoyama Gōshō. Tác phẩm được đăng tải trên tạp chí Weekly Shōnen Sunday của nhà xuất bản Shogakukan vào năm 1994 và được đóng gói thành 104 tập tankōbon tính đến tháng 10 năm 2023', '1994-01-19', 76000, 23, '/asset/img/conan90.u2751.d20170221.t111539.890106.png', '2023-12-12 07:40:25', '2023-12-12 07:40:25', NULL, 2, 2),
@@ -157,11 +157,7 @@ INSERT INTO `books` (`id`, `name`, `description`, `publish_date`, `price`, `qual
 (50, 'Giới Hạn Của Bạn Chỉ Là Xuất Phát Điểm Của Tôi', 'Giới Hạn Của Bạn Chỉ Là Xuất Phát Điểm Của Tôi<br/>\n            Giới hạn là gì?<br/>\n            Giới hạn liệu có phải ranh giới an toàn của mỗi người?<br/>\n            Có lẽ không, giới hạn là để phá bỏ<br/>\n            Bởi giới hạn của bạn chỉ là xuất phát điểm của người khác.<br/>\n            Tôi tin rằng bạn có những ước mơ rất tuyệt vời, tôi cũng tin rằng bạn có thể thực hiện được nó. Nhưng ước mơ mà không hành động thì mãi mãi chỉ nằm trong mộng tưởng, hành trình dài mà không đi thì mãi mãi vẫn chẳng thể chạm đích. Giới hạn đặt ra để bứt phá, chứ không phải điểm tận cùng. Tôi hy vọng mỗi sáng đánh thức bạn dậy không phải là tiếng chuông đồng hồ mà là khát vọng lớn lao trong trái tim bạn.', '2018-07-07', 30000, 86, '/asset/img/h47.jpg', '2024-01-05 10:06:42', '2024-01-05 10:06:42', NULL, 33, 8),
 (51, 'BẠN CHỈ CẦN SỐNG TỐT, TRỜI XANH TỰ AN BÀI', 'Chẳng phải có ai đó đã từng nói rằng: Trên đời này, ta thường quên mất việc của bản thân, thích xen vào việc của người khác và lo lắng chuyện của ông trời. Vậy thì muốn vui vẻ, chỉ cần để tâm đến việc của mình, đừng xen vào việc của người khác và hãy để trời xanh tự an bài.<br/>\n\n            Làm người, nên hiểu mệnh, đừng xem mệnh. Mệnh ở đây chính là những điều ta đã gieo trong quá khứ, việc đang làm trong hiện tại và tất cả sẽ ảnh hưởng đến tương lai. Hiểu mình là ai, đang đứng ở vị trí nào, cần sống và cư xử ra sao để trước hết thấy bản thân tự tại, trung dung. Thế giới của người khác, vận của trời, nếu không bước vào được thì đừng cố chen vào, làm khó người khó mình. Hà tất phải như vậy?', NULL, 30000, 86, '/asset/img/h48.jpg', '2024-01-05 10:06:42', '2024-01-05 10:06:42', NULL, 34, 8),
 (52, 'Điều Ý Nghĩa Nhất Trong Từng Khoảnh Khắc Cuộc Đời', 'The One Thing - Điều Ý Nghĩa Nhất Trong Từng Khoảnh Khắc Cuộc Đời (Tái Bản 2018)<br/>\n            Bạn muốn ít sự sao nhãng. Bạn muốn ít sự lựa chọn. Hàng ngày, bạn phải trả lời cả đống email, tin nhắn qua điện thoại, tin nhắn trên internet khiến bạn sao nhãng và ức chế tâm lý nặng nề. Bạn luôn phải đáp ứng cùng lúc ít nhất hai vai trò. Khi đi làm, bạn phải là một nhân viên tốt, hoàn thành xuất sắc công việc, đồng thời khi tan sở về nhà, bạn phải trở thành người chồng/vợ, người cha/mẹ, người con tốt, hoàn thành nghĩa vụ với gia đình mình. Cái giá bạn phải trả là gì? Chất lượng công việc đi xuống, trễ deadline, lương thấp, không thăng tiến và ức chế nặng.', '2018-05-22', 30000, 86, '/asset/img/h49.jpg', '2024-01-05 10:06:42', '2024-01-05 10:06:42', NULL, 35, 8),
-(53, 'Sống chậm mà chất', 'Tận hưởng cuộc sống qua từng khoảnh khắc.<br/>\n            Cuốn sách này sẽ không đưa đến cho bạn những khái niệm mới. Nó viết về những khái niệm đã trở nên quen thuộc trong suốt thời gian qua tại Việt Nam: sống chậm, sống tối giản, chánh niệm… Nó sẽ là góc nhìn và sự tổng hợp đến từ tác giả Brooke McAlary – người xếp hạng 1 trên bảng iTune Health Postcast của Apple năm 2016 với Postcast The Slow Home được hơn 1 triệu lượt tải về trên khắp thế giới.', '2020-01-01', 30000, 86, '/asset/img/h50.jpg', '2024-01-05 10:06:42', '2024-01-05 10:06:42', NULL, 36, 8),
-(65, '123', '123', '2024-01-01', 120000, 2, 'uploads/book/65/Pj5d2IOYV2opSDNpD0GXRNW9FLuWL6P6vhDvoAbe.jpg', '2024-01-20 09:14:36', '2024-01-20 09:32:09', '2024-01-20 09:32:09', 10, 4),
-(66, '456', '123', '2024-01-02', 1233, 15, 'uploads/book/66/pXTooiQ2opoGQsohEG8iiggjlZNVqXrPcdu1slrE.jpg', '2024-01-20 09:24:14', '2024-01-20 09:32:52', NULL, 15, 8),
-(67, 'hihi', '789', '2024-01-04', 14568, 78, 'uploads/book/67/Pp2gGL0cavtwkReQc9yNYDi0nOTYxyrm25d6uqvv.jpg', '2024-01-20 10:25:40', '2024-01-20 10:26:02', NULL, 4, 2),
-(68, '123', '4124', '2024-01-10', 58000, 456, 'uploads/book/68/olG9ktNlUDIIGGZL3aJKI23tm1u5KgIE7hj8AdKm.jpg', '2024-01-21 18:26:48', '2024-01-21 18:52:17', NULL, 16, 8);
+(53, 'Sống chậm mà chất', 'Tận hưởng cuộc sống qua từng khoảnh khắc.<br/>\n            Cuốn sách này sẽ không đưa đến cho bạn những khái niệm mới. Nó viết về những khái niệm đã trở nên quen thuộc trong suốt thời gian qua tại Việt Nam: sống chậm, sống tối giản, chánh niệm… Nó sẽ là góc nhìn và sự tổng hợp đến từ tác giả Brooke McAlary – người xếp hạng 1 trên bảng iTune Health Postcast của Apple năm 2016 với Postcast The Slow Home được hơn 1 triệu lượt tải về trên khắp thế giới.', '2020-01-01', 30000, 86, '/asset/img/h50.jpg', '2024-01-05 10:06:42', '2024-01-05 10:06:42', NULL, 36, 8);
 
 -- --------------------------------------------------------
 
@@ -185,8 +181,7 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `quantity`, `price`, `created_at`, `updated_at`, `deleted_at`, `book_id`, `user_id`) VALUES
-(1, 6, 76000, '2024-01-20 09:58:34', '2024-01-20 10:13:48', NULL, 5, 1),
-(2, 4, 12000, '2024-01-20 09:59:02', '2024-01-20 10:13:43', NULL, 11, 1);
+(76, 1, 12000, '2024-07-14 22:58:01', '2024-07-14 22:58:01', NULL, 11, 2);
 
 -- --------------------------------------------------------
 
@@ -197,6 +192,7 @@ INSERT INTO `carts` (`id`, `quantity`, `price`, `created_at`, `updated_at`, `del
 CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
+  `slug` varchar(50) NOT NULL,
   `description` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -207,12 +203,14 @@ CREATE TABLE `categories` (
 -- Đang đổ dữ liệu cho bảng `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Kỹ năng sống', 'Sách Kỹ năng sống là tập hợp các hành vi tích cực và khả năng thích nghi cho phép mỗi cá nhân đối phó hiệu quả với các nhu cầu và thách thức của cuộc sống hàng ngày', '2017-05-27 07:40:25', '2017-05-27 07:40:25', NULL),
-(2, 'Truyện Tranh', 'Truyện tranh hay mạn họa là một phương tiện được sử dụng để diễn đạt ý tưởng bằng hình ảnh, thường kết hợp với văn bản hoặc thông tin hình ảnh khác. Thông thường, nó có dạng một chuỗi các khung hình liên tiếp. Các yếu tố văn bản như ô bóng chữ, chú thích, và Từ tượng thanh có thể chỉ ra đối thoại, diễn đạt, hiệu ứng âm thanh hoặc thông tin khác', '2023-12-12 07:40:25', '2023-12-12 07:40:25', NULL),
-(3, 'Sách Giáo Khoa', 'SGK là loại sách cung cấp kiến thức, được biên soạn với mục đích dạy và học tại trường học[1][2]. Thuật ngữ sách giáo khoa còn có nghĩa mở rộng là một loại sách chuẩn cho một ngành học. Sách giáo khoa được phân loại dựa theo đối tượng sử dụng hoặc chủ đề của sách. Việc xuất bản sách giáo khoa thường dành cho các nhà xuất bản chuyên ngành.', '2023-12-12 07:40:25', '2023-12-12 07:40:25', NULL),
-(4, 'Sách Công Nghệ Thông Tin', 'Cung cấp cho người đọc những kiến thức về công nghệ thông tin ', '2023-12-12 07:40:25', '2023-12-12 07:40:25', NULL),
-(8, 'Tiểu thuyết', 'Tiểu thuyết là một thể loại văn học dài, tập trung vào việc xây dựng câu chuyện và phát triển nhân vật. Đây là một hình thức tường thuật tường minh, cho phép tác giả khám phá và khắc họa sâu hơn về tâm lý, ý nghĩa và sự phát triển của các nhân vật và sự kiện trong câu chuyện.', '2024-01-05 09:22:14', '2024-01-05 09:22:14', NULL);
+INSERT INTO `categories` (`id`, `name`, `slug`, `description`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Kỹ năng sống', 'ky-nang-song', 'Sách Kỹ năng sống là tập hợp các hành vi tích cực và khả năng thích nghi cho phép mỗi cá nhân đối phó hiệu quả với các nhu cầu và thách thức của cuộc sống hàng ngày', '2017-05-27 07:40:25', '2017-05-27 07:40:25', NULL),
+(2, 'Truyện Tranh', 'truyen-tranh', 'Truyện tranh hay mạn họa là một phương tiện được sử dụng để diễn đạt ý tưởng bằng hình ảnh, thường kết hợp với văn bản hoặc thông tin hình ảnh khác. Thông thường, nó có dạng một chuỗi các khung hình liên tiếp. Các yếu tố văn bản như ô bóng chữ, chú thích, và Từ tượng thanh có thể chỉ ra đối thoại, diễn đạt, hiệu ứng âm thanh hoặc thông tin khác a', '2023-12-12 07:40:25', '2024-07-14 21:30:02', NULL),
+(3, 'Sách Giáo Khoa', 'sach-giao-khoa', 'SGK là loại sách cung cấp kiến thức, được biên soạn với mục đích dạy và học tại trường học[1][2]. Thuật ngữ sách giáo khoa còn có nghĩa mở rộng là một loại sách chuẩn cho một ngành học. Sách giáo khoa được phân loại dựa theo đối tượng sử dụng hoặc chủ đề của sách. Việc xuất bản sách giáo khoa thường dành cho các nhà xuất bản chuyên ngành.', '2023-12-12 07:40:25', '2023-12-12 07:40:25', NULL),
+(4, 'Sách Công Nghệ Thông Tin', 'sach-cong-nghe-thông-tin', 'Cung cấp cho người đọc những kiến thức về công nghệ thông tin ', '2023-12-12 07:40:25', '2023-12-12 07:40:25', NULL),
+(8, 'Tiểu thuyết', 'tieu-thuyet', 'Tiểu thuyết là một thể loại văn học dài, tập trung vào việc xây dựng câu chuyện và phát triển nhân vật. Đây là một hình thức tường thuật tường minh, cho phép tác giả khám phá và khắc họa sâu hơn về tâm lý, ý nghĩa và sự phát triển của các nhân vật và sự kiện trong câu chuyện.', '2024-01-05 09:22:14', '2024-01-05 09:22:14', NULL),
+(9, 'Phan Tấn Tài', '', '123', '2024-07-10 02:13:34', '2024-07-10 02:14:17', '2024-07-10 02:14:17'),
+(10, 'Nguyên Văn An', '', '123', '2024-07-14 21:23:38', '2024-07-14 21:23:48', '2024-07-14 21:23:48');
 
 -- --------------------------------------------------------
 
@@ -222,13 +220,24 @@ INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at
 
 CREATE TABLE `comments` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `comment` text NULL,
+  `comment` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `book_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `comments`
+--
+
+INSERT INTO `comments` (`id`, `comment`, `created_at`, `updated_at`, `deleted_at`, `book_id`, `user_id`) VALUES
+(1, 'Sách rất hay', '2024-02-05 09:25:12', '2024-02-05 09:25:23', '2024-02-05 09:25:23', 5, 2),
+(2, 'tôi sẽ ghé lại', '2024-02-05 09:25:58', '2024-02-05 09:25:58', NULL, 5, 2),
+(3, 'tài ngáo đá', '2024-02-05 09:26:39', '2024-07-09 21:45:42', '2024-07-09 21:45:42', 5, 1),
+(5, 'alo', '2024-07-09 04:58:24', '2024-07-09 04:58:24', NULL, 26, 2),
+(6, 'aaaaaaaa', '2024-07-12 18:59:06', '2024-07-12 18:59:18', '2024-07-12 18:59:18', 27, 1);
 
 -- --------------------------------------------------------
 
@@ -254,13 +263,22 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `favoritebooks` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `content` text NOT NULL,
+  `price` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `book_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `favoritebooks`
+--
+
+INSERT INTO `favoritebooks` (`id`, `price`, `created_at`, `updated_at`, `deleted_at`, `book_id`, `user_id`) VALUES
+(18, 30000, '2024-02-06 19:48:28', '2024-02-06 19:48:28', NULL, 40, 2),
+(55, 120000, '2024-07-14 19:28:25', '2024-07-14 19:28:25', NULL, 1, 1),
+(56, 30000, '2024-07-14 19:28:30', '2024-07-14 19:28:30', NULL, 26, 1);
 
 -- --------------------------------------------------------
 
@@ -285,15 +303,30 @@ CREATE TABLE `images` (
 
 CREATE TABLE `invoices` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `Total` bigint(20) DEFAULT NULL,
-  `ShippingAddress` varchar(50) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `ShippingAddress` varchar(255) DEFAULT NULL,
   `ShippingPhone` varchar(50) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
+  `quanlity` int(50) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `invoices`
+--
+
+INSERT INTO `invoices` (`id`, `name`, `ShippingAddress`, `ShippingPhone`, `total`, `quanlity`, `status`, `created_at`, `updated_at`, `deleted_at`, `user_id`) VALUES
+(47, 'Phan Tấn Tài', 'Bến Tre', '0344312253', 54000, NULL, 'Đang chuẩn bị', '2024-07-11 23:31:30', '2024-07-11 23:51:31', NULL, 1),
+(48, 'Mỹ Trang', 'Bến Tre', '0344312253', 132000, NULL, 'Đã hoàn thành', '2024-07-14 23:37:54', '2024-07-14 23:51:35', NULL, 1),
+(49, 'Quang Nam', 'Bến Tre', '0344312253', 30000, NULL, 'Chờ xác nhận', '2024-07-14 23:48:58', '2024-07-14 23:48:58', NULL, 1),
+(52, 'Phan Đình Tùng', 'Bến Tre', '0344312253', 88000, NULL, 'Đã huỷ', '2024-07-15 00:23:24', '2024-07-15 08:30:52', NULL, 1),
+(54, 'Ngyễn Kim Ngân', 'Bến Tre', '0344312253', 30000, NULL, 'Đã hoàn thành', '2024-07-15 00:31:01', '2024-07-15 06:00:43', NULL, 1),
+(60, 'Phan Tấn Tài', 'Bến Tre', '0344312253', 180000, NULL, 'Đang chuẩn bị', '2024-07-15 03:37:13', '2024-07-15 05:48:03', NULL, 1),
+(62, 'Lê Văn Hùng', 'Long An', '0344312253', 116000, NULL, 'Chờ xác nhận', '2024-07-15 08:40:14', '2024-07-15 08:40:14', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -303,15 +336,35 @@ CREATE TABLE `invoices` (
 
 CREATE TABLE `invoice_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `unitprice` bigint(20) DEFAULT NULL,
-  `PaymentMethods` varchar(255) DEFAULT NULL,
-  `quantity` int(11) DEFAULT 0,
+  `quantity` int(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `invoice_id` bigint(20) UNSIGNED NOT NULL,
   `book_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `invoice_details`
+--
+
+INSERT INTO `invoice_details` (`id`, `quantity`, `created_at`, `updated_at`, `deleted_at`, `invoice_id`, `book_id`) VALUES
+(53, 1, '2024-07-14 23:31:30', '2024-07-14 23:31:30', NULL, 47, 27),
+(54, 1, '2024-07-14 23:31:30', '2024-07-14 23:31:30', NULL, 47, 7),
+(55, 1, '2024-07-14 23:31:30', '2024-07-14 23:31:30', NULL, 47, 12),
+(56, 1, '2024-07-14 23:37:54', '2024-07-14 23:37:54', NULL, 48, 7),
+(57, 1, '2024-07-14 23:37:55', '2024-07-14 23:37:55', NULL, 48, 39),
+(58, 3, '2024-07-14 23:37:55', '2024-07-14 23:37:55', NULL, 48, 42),
+(59, 1, '2024-07-14 23:48:58', '2024-07-14 23:48:58', NULL, 49, 28),
+(64, 1, '2024-07-15 00:23:24', '2024-07-15 00:23:24', NULL, 52, 5),
+(65, 1, '2024-07-15 00:23:24', '2024-07-15 00:23:24', NULL, 52, 8),
+(68, 1, '2024-07-15 00:31:01', '2024-07-15 00:31:01', NULL, 54, 27),
+(74, 1, '2024-07-15 03:37:13', '2024-07-15 03:37:13', NULL, 60, 26),
+(75, 1, '2024-07-15 03:37:13', '2024-07-15 03:37:13', NULL, 60, 27),
+(76, 4, '2024-07-15 03:37:13', '2024-07-15 03:37:13', NULL, 60, 28),
+(79, 1, '2024-07-15 08:40:14', '2024-07-15 08:40:14', NULL, 62, 37),
+(80, 1, '2024-07-15 08:40:14', '2024-07-15 08:40:14', NULL, 62, 36),
+(81, 1, '2024-07-15 08:40:14', '2024-07-15 08:40:14', NULL, 62, 3);
 
 -- --------------------------------------------------------
 
@@ -399,37 +452,6 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `reviews`
---
-
-CREATE TABLE `reviews` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `Comment` text DEFAULT NULL,
-  `rating` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `book_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `slide_shows`
---
-
-CREATE TABLE `slide_shows` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `Image` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `users`
 --
 
@@ -452,15 +474,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `address`, `password`, `phone`, `role`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Tài Phan', 'ptai0866@gmail.com', 'Bến Tre', '$2y$10$oXtcssbMwbelHhzyHlGJduj3QZ5LxD3Gd/bZhzvgEkk5K7/h26wxq', '0344312253', 1, NULL, '2023-12-11 07:49:16', '2023-12-11 07:49:16', NULL),
+(1, 'Phan Tấn Tài', 'ptai0866@gmail.com', 'Bến Tre', '$2y$10$oXtcssbMwbelHhzyHlGJduj3QZ5LxD3Gd/bZhzvgEkk5K7/h26wxq', '0344312253', 1, NULL, '2023-12-11 07:49:16', '2024-07-11 19:19:30', NULL),
 (2, 'Quang Nam', 'quangnam@gmail.com', 'Tiền Giang', '$2y$10$ubUolbCe3fzrKAHAzt9PX.254CYXk.CNK.gS0si6kfv1Er2kauMRu', '0344312254', 1, NULL, '2023-12-11 07:49:16', '2023-12-11 07:49:16', NULL),
 (3, 'Quốc Việt', 'quocviet@gmail.com', 'TP HCM', '$2y$10$e1b8dGWO9eEMGOpR4JI8eO2S5EXf2ZnwxzmefF6ZT45Uz/72pLEGK', '0344312255', 1, NULL, '2023-12-11 07:49:16', '2023-12-11 07:49:16', NULL),
-(17, 'phna văn tuán', 'taun@gmail.com', 'Binh Dương', '$2y$10$n3l5Tcx2mY58wXROCqaKY.CBHqPlfGXOKwBLfv7jih3FMUpRcL2Vq', '0344312258', 0, NULL, '2024-01-20 11:36:03', '2024-01-20 11:36:03', NULL),
-(18, '12312', 't@gmail.com', 'vinh', '$2y$10$ers3AgjKgfDRVIVRq69pQuBbOAlAXNFArFly2uwSSzYe4nJgDEo2q', '0121804159', 0, NULL, '2024-01-20 11:38:29', '2024-01-20 11:38:29', NULL),
-(19, 'qưe', 'qưe', 'qưe', '$2y$10$FiiQsF54ibdwB/dmws6wqu4tQU0nPxAi4S59uuaIBJwNJnchxs5o.', 'qưe', 0, NULL, '2024-01-20 11:44:55', '2024-01-20 11:44:55', NULL),
-(20, '123', '2323', '4124', '$2y$10$utjgoEEx4xfkrJ43dS85DeLUd3k9DrmgqEewxuGNvP7hNwMVi4skO', '5123', 0, NULL, '2024-01-20 11:45:47', '2024-01-20 11:45:47', NULL),
-(21, '2342', '4124124', '12123', '$2y$10$0YuJh8c3kSd0AdyOXrVzaOCyO89wkYvJv7XsKHF0zUNqUKHJMLMr2', '41241', 0, NULL, '2024-01-20 11:48:32', '2024-01-20 11:48:32', NULL),
-(25, 'Phan Văn Trị', '3123123', '4124213', '$2y$10$TmLrCSw3jcgAiL1IM/Keo.bZevdvUBbLurEzvdg3e8ZYka0iuBNYm', '41241241', 1, NULL, '2024-01-20 23:18:01', '2024-01-21 18:58:41', NULL);
+(17, 'Phan Văn Tuấn', 'taun@gmail.com', 'Binh Dương', '$2y$10$n3l5Tcx2mY58wXROCqaKY.CBHqPlfGXOKwBLfv7jih3FMUpRcL2Vq', '0344312258', 0, NULL, '2024-01-20 11:36:03', '2024-07-11 00:15:53', NULL),
+(25, 'Nguyễn Kim Ngân', '3123123@gmail.com', 'Bình Định', '$2y$10$TmLrCSw3jcgAiL1IM/Keo.bZevdvUBbLurEzvdg3e8ZYka0iuBNYm', '0947212932', 1, NULL, '2024-01-20 23:18:01', '2024-07-10 23:31:52', NULL),
+(30, 'Nguyên Văn An', 'an0866@gmail.com', 'Tây Ninh', '$2y$10$leg467ZkRuWRKrD6tgrdIOk9CYhhXUW/BYWE5cuc0C4v1hvvbvUfW', '0947121932', 1, NULL, '2024-07-11 05:35:39', '2024-07-14 01:04:25', NULL),
+(31, 'Lê Văn Hùng', 'hung@gmail.com', 'Vũng Tàu', '$2y$10$W09Jbs57Qpg7rI41m8ayNuxDOEIkPheX9TGU4m6oK1iUzrVDPRwwq', '0947121935', 1, NULL, '2024-07-14 00:12:05', '2024-07-14 00:12:05', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -567,20 +587,6 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Chỉ mục cho bảng `reviews`
---
-ALTER TABLE `reviews`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `reviews_book_id_foreign` (`book_id`),
-  ADD KEY `reviews_user_id_foreign` (`user_id`);
-
---
--- Chỉ mục cho bảng `slide_shows`
---
-ALTER TABLE `slide_shows`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
@@ -602,25 +608,25 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT cho bảng `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
@@ -632,7 +638,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT cho bảng `favoritebooks`
 --
 ALTER TABLE `favoritebooks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT cho bảng `images`
@@ -644,13 +650,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT cho bảng `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT cho bảng `invoice_details`
 --
 ALTER TABLE `invoice_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
@@ -671,22 +677,10 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `reviews`
---
-ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `slide_shows`
---
-ALTER TABLE `slide_shows`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -744,13 +738,6 @@ ALTER TABLE `invoice_details`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `payments_invoices_id_foreign` FOREIGN KEY (`invoices_id`) REFERENCES `invoices` (`id`);
-
---
--- Các ràng buộc cho bảng `reviews`
---
-ALTER TABLE `reviews`
-  ADD CONSTRAINT `reviews_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`),
-  ADD CONSTRAINT `reviews_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
