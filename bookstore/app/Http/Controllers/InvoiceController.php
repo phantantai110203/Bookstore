@@ -14,9 +14,20 @@ use App\Models\User;
 use App\Policies\InvoiceDetailPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class InvoiceController extends Controller
 {
+    protected function fixImage(Book $p)
+    {
+        //tự dowdload hình ảnh bất kỳ vào và để vào thư mục public/img
+        if ($p->img && Storage::disk('public')->exists($p->img)) {
+            $p->img = Storage::url($p->img);
+        }
+        // else {
+        //     $p->img = '/img/sgktoan.jpg';
+        // }
+    }
 
     // Phương thức để hủy đơn hàng
     public function cancel($id)
@@ -49,6 +60,9 @@ class InvoiceController extends Controller
         $total = $carts->sum(function ($cart) {
             return $cart->price * $cart->quantity;
         });
+        foreach ($books as $p) {
+            $this->fixImage($p);
+        }
 
         return view('pages.invoice', compact('carts', 'books', 'total', 'invoices', 'count_invoice'));
     }

@@ -32,7 +32,9 @@ class HomeController extends Controller
         $cats = Category::orderBy('name', 'ASC')->get();
         $aut = Author::orderBy('name', 'ASC')->get();
         $lst = Book::where('category_id', $book->category_id)->limit(4)->get();
-        $this->fixImage($book);
+        foreach ($lst as $p) {
+            $this->fixImage($p);
+        }
         return view('pages.products-detail', compact('book', 'cats', 'lst', 'aut', 'comments'));
     }
     //tim kiếm ở trang danh sách
