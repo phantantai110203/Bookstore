@@ -8,26 +8,26 @@
 
 
 @section('content')
-    <dl>
-        <dt>Tên người dùng:</dt>
-        <dd>{{ $p->name }}</dd>
+    <dl style="margin-left:30px">
+        <label>Tên người dùng:</label>
+        <label>{{ $p->name }}</label><br>
 
-        <dt>Email:</dt>
-        <dd>{{ $p->email }}</dd>
+        <label>Email:</label>
+        <label>{{ $p->email }}</label><br>
 
-        <dt>Địa chỉ:</dt>
-        <dd>{{ $p->address }}</dd>
+        <label>Địa chỉ:</label>
+        <label>{{ $p->address }}</label><br>
 
-        <dt>Số điện thoại:</dt>
-        <dd>{{ $p->phone }}</dd>
+        <label>Số điện thoại:</label>
+        <label>{{ $p->phone }}</label><br>
 
-        <dt>Vai trò:</dt>
-        <dd>{{ $p->role ? 'Admin' : 'Khách hàng' }}</dd>
+        <label>Vai trò:</label>
+        <label>{{ $p->role ? 'Admin' : 'Khách hàng' }}</label><br>
 
-        <dt>Ngày tạo tài khoản:</dt>
-        <dd>{{ $p->created_at }}</dd>
+        <label>Ngày tạo tài khoản:</label>
+        <label>{{ $p->created_at }}</label><br>
     </dl>
-    <a href="{{ route('users.index') }}">
+    <a style="margin-left:5px " href="{{ route('users.index') }}">
         < Quay lại trang danh sách</a>
 
 

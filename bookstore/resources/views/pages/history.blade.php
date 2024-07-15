@@ -4,7 +4,7 @@
 
 @section('navbar')
     @parent
-    <div class="container mt-5" >
+    <div class="container mt-5">
         <h2 style="margin-top:35px">Lịch sử giao dịch</h2>
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -20,14 +20,14 @@
                     @foreach ($invoices as $invoice)
                         <tr>
                             <td>{{ $invoice->id }}</td>
-                            <td>{{ $invoice->created_at }}</td>
+                            <td>{{ $invoice->created_at->format('d/m/Y') }}</td>
                             <td>{{ number_format($invoice->total, 0, ',', '.') }} VND</td>
                             <td>
-                                <button class="btn btn-primary" type="button" data-toggle="collapse"
-                                    data-target="#invoiceDetails-{{ $invoice->id }}" aria-expanded="false"
-                                    aria-controls="invoiceDetails-{{ $invoice->id }}">
-                                    Xem chi tiết
-                                </button>
+                                <a href="{{ route('invoicedetails.show', $invoice->id) }}">
+                                    <button class="btn btn-primary" type="button">
+                                        Xem chi tiết
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                         <tr class="collapse" id="invoiceDetails-{{ $invoice->id }}">

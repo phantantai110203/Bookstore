@@ -1,86 +1,60 @@
 @extends('layouts.app')
 
-
 @section('title', 'Trang chủ')
 
 @section('navbar')
     @parent
-    <div class="container">
 
-        <div class="col-lg-5" style="margin-top: 100px;">
-            <div class="order-summary">
-                <h3>CHI TIẾT HÓA ĐƠN</h3>
+    <div class="container" style="margin-left:15px">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 style="color: black"> Thông tin đơn hàng</h2>
+                <p><strong>Mã đơn hàng:</strong> {{ $oders[0]->id }}</p>
+                <p><strong>Ngày đặt hàng:</strong> {{ $oders[0]->created_at->format('d/m/Y ') }}</p>
+                <p><strong>Tên khách hàng:</strong> {{ $oders[0]->name }}</p>
+                <p style="font-weight: bold; color:rgb(146, 146, 40)"><strong style="font-weight: none;color: black">Trạng
+                        thái đơn hàng:</strong>
+                    {{ $oders[0]->status }}</p>
+                @if ($oders[0]->status == 'Chờ xác nhận')
+                    <form method="POST" action="{{ route('cancel.order', ['id' => $oders[0]->id]) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Hủy đơn hàng</button>
+                    </form>
+                @endif
 
-                <table class="table table-mini-cart">
+                <hr>
+                <h3 style="color: black">Chi tiết đơn hàng</h3>
+                <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th colspan="2">Sản phẩm</th>
+                            <th>#</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="product-col">
-                                <h3 class="product-title">
-                                    Circled Ultimate 3D Speaker ×
-                                    <span class="product-qty">4</span>
-                                </h3>
-                            </td>
-
-                            <td class="price-col">
-                                <span>$1,040.00</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="product-col">
-                                <h3 class="product-title">
-                                    Fashion Computer Bag ×
-                                    <span class="product-qty">2</span>
-                                </h3>
-                            </td>
-
-                            <td class="price-col">
-                                <span>$418.00</span>
-                            </td>
-                        </tr>
+                        @foreach ($oders_details as $key => $detail)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $detail->book->name }}</td>
+                                <td>{{ $detail->quantity }}</td>
+                                <td>{{ number_format($detail->book->price, 2, ',', '.') }} VNĐ</td>
+                                <td>{{ number_format($detail->quantity * $detail->book->price, 2, ',', '.') }} VNĐ</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
-
-                        <tr class="order-shipping">
-                            <td class="text-left" colspan="2">
-                                <h4 class="m-b-sm">Vận Chuyển</h4>
-
-                                <div class="form-group form-group-custom-control">
-                                    <div class="custom-control custom-radio d-flex">
-                                        <input type="radio" class="custom-control-input" name="radio" checked />
-                                        <label class="custom-control-label">Đang Giao</label>
-                                    </div>
-                                    <!-- End .custom-checkbox -->
-                                </div>
-                                <!-- End .form-group -->
-
-                            </td>
-
-                        </tr>
-
-                        <tr class="order-total">
-                            <td>
-                                <h4>Tổng tiền:</h4>
-                            </td>
-                            <td>
-                                <b class="total-price"><span>$1,603.80</span></b>
-                            </td>
+                        <tr>
+                            <th colspan="4" class="text-right">Tổng tiền:</th>
+                            <td>{{ number_format($oders[0]->total, 2, ',', '.') }} VNĐ</td>
                         </tr>
                     </tfoot>
                 </table>
-
-
-
             </div>
-            <!-- End .cart-summary -->
         </div>
-        <!-- End .col-lg-4 -->
     </div>
-    <!-- End .row -->
-    </div>
+
+
 @endsection

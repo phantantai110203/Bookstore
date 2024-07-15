@@ -2157,8 +2157,8 @@ progress {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
+  color: #d3dbe3;
+  background-color: #efe4e4;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   -webkit-appearance: none;
@@ -2179,7 +2179,7 @@ progress {
   cursor: pointer;
 }
 .form-control:focus {
-  color: #212529;
+
   background-color: #fff;
   border-color: #86b7fe;
   outline: 0;
@@ -2205,7 +2205,7 @@ progress {
   margin: -0.375rem -0.75rem;
   -webkit-margin-end: 0.75rem;
   margin-inline-end: 0.75rem;
-  color: #212529;
+
   background-color: #e9ecef;
   pointer-events: none;
   border-color: inherit;
@@ -2228,7 +2228,7 @@ progress {
   margin: -0.375rem -0.75rem;
   -webkit-margin-end: 0.75rem;
   margin-inline-end: 0.75rem;
-  color: #212529;
+  
   background-color: #e9ecef;
   pointer-events: none;
   border-color: inherit;
@@ -2679,7 +2679,7 @@ textarea.form-control-lg {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+
   text-align: center;
   white-space: nowrap;
   background-color: #e9ecef;
@@ -2871,23 +2871,7 @@ textarea.form-control-lg {
   background-position: right 0.75rem center, center right 2.25rem;
   background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
-.was-validated .form-select:invalid:focus, .form-select.is-invalid:focus {
-  border-color: #dc3545;
-  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
-}
 
-.was-validated .form-check-input:invalid, .form-check-input.is-invalid {
-  border-color: #dc3545;
-}
-.was-validated .form-check-input:invalid:checked, .form-check-input.is-invalid:checked {
-  background-color: #dc3545;
-}
-.was-validated .form-check-input:invalid:focus, .form-check-input.is-invalid:focus {
-  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
-}
-.was-validated .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label {
-  color: #dc3545;
-}
 
 .form-check-inline .form-check-input ~ .invalid-feedback {
   margin-left: 0.5em;

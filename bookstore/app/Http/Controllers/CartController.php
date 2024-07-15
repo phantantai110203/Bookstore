@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Book;
 use App\Models\Cart;
 use App\Models\User;
@@ -17,6 +18,34 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function addToCart(Request $request)
+    {
+        $userId = auth()->id(); // Assuming you're using authentication
+        $bookId = $request->input('book_id');
+        $price = $request->input('price');
+        $quantity = $request->input('quantity');
+
+        // Check if the product is already in the cart
+        $cartItem = Cart::where('user_id', $userId)
+            ->where('book_id', $bookId)
+            ->first();
+
+        if ($cartItem) {
+            // Update quantity
+            $cartItem->quantity += $quantity;
+            $cartItem->save();
+        } else {
+            // Add new item to cart
+            Cart::create([
+                'user_id' => $userId,
+                'book_id' => $bookId,
+                'price' => $price,
+                'quantity' => $quantity
+            ]);
+        }
+
+        return response()->json(['message' => 'Item added to cart successfully']);
+    }
 
     protected function fixImage(Book $p)
     {
@@ -28,8 +57,10 @@ class CartController extends Controller
         //     $p->img = '/img/sgktoan.jpg';
         // }
     }
+
     public function index()
     {
+
         $book = Book::orderBy('name', 'ASC')->get();
         $userId = auth()->user()->id;
         $cartItems = Cart::where('user_id', $userId)->get();

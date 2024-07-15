@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
+use App\Models\Book;
+use App\Models\InvoiceDetail;
+use App\Models\User;
+use Database\Seeders\InvoiceSeeder;
 use Illuminate\Http\Request;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -15,27 +19,42 @@ class InvoiceadminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lst = Invoice::all();
-        $latestOrders = Invoice::orderBy('created_at', 'desc')->take(10)->get();
-        $monthlyRevenue = Invoice::select(
-            DB::raw('MONTH(created_at) as month'),
-            DB::raw('SUM(total) as revenue')
-        )
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get();
-        $revenueData = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $revenueData[$i] = 0;
+        $status = $request->query('status'); // Lấy tham số trạng thái từ query string
+
+
+        $startDate = $request->query('start_date'); // Lấy tham số ngày bắt đầu từ query string
+        $endDate = $request->query('end_date'); // Lấy tham số ngày kết thúc từ query string
+        $invoiceId = $request->query('invoice_id'); // Lấy tham số mã hóa đơn từ query string
+
+        $latestOrders = Invoice::orderBy('created_at', 'desc');
+
+        // Lọc theo trạng thái nếu có được cung cấp
+        if ($status) {
+            $latestOrders->where('status', $status);
         }
 
-        return view('admin.oders-index',  [
+        if ($startDate && $endDate) {
+            $latestOrders->whereBetween('created_at', [$startDate, $endDate]);
+        }
+
+        if ($invoiceId) {
+            $latestOrders->where('id', $invoiceId);
+        }
+
+
+        $latestOrders = $latestOrders->take(50)->get(); // Lấy 50 đơn hàng mới nhất
+
+        $revenueData = []; // Tính toán doanh thu như trước
+
+        return view('admin.oders-index', [
             'monthlyRevenue' => $revenueData,
-            'latestOrders' => $latestOrders
+            'latestOrders' => $latestOrders,
+            'selectedStatus' => $status, // Truyền trạng thái đã chọn vào view
         ]);
     }
+
 
     // public function index()
     // {
@@ -64,10 +83,33 @@ class InvoiceadminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Invoice $invoice)
+    public function show($invoice)
     {
-        //
+        $oders_details = InvoiceDetail::where('invoice_id', $invoice)->get();
+        $oders = Invoice::where('id', $invoice)->get();
+        foreach ($oders as $key => $ord) {
+            $user_id = $ord->user_id;
+            $book_id = $ord->book_id;
+        }
+        $user = User::where('id', $user_id)->first();
+        if ($oders->isEmpty()) {
+            // Xử lý khi không tìm thấy hóa đơn
+            abort(404);
+        }
+        // Load chi tiết hóa đơn (InvoiceDetail) thông qua quan hệ trong mô hình Invoice
+        // Lấy danh sách sản phẩm (books) dựa trên book_id trong chi tiết hóa đơn
+        $books = [];
+        foreach ($oders_details as $detail) {
+            $book = Book::find($detail->book_id);
+            if ($book) {
+                $books[] = $book;
+            }
+        }
+        //return $oders_details;
+        return view('admin.oders-show')->with(compact('oders_details', 'user', 'oders', 'books'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -80,16 +122,14 @@ class InvoiceadminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreInvoiceRequest $request, Invoice $invoice)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'status' => 'required|string'
-        ]);
+        $invoice = Invoice::findOrFail($id);
 
-        $invoice->status = $request->input('status');
+        $invoice->status = $request->status;
+
         $invoice->save();
-
-        return response()->json(['success' => 'Cập nhật trạng thái thành công!']);
+        return redirect()->route('invoiceadmins.index')->with('success', 'Cập nhật trạng thái thành công.');
     }
 
     public function thayDoiTrangThaiDonHang(Request $request)
@@ -119,5 +159,4 @@ class InvoiceadminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-
 }

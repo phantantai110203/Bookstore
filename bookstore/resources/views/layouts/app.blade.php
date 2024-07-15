@@ -15,26 +15,27 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/payment.css') }}">
     <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    {{-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    {{-- <link rel="stylesheet" href="assets/css/bootstrap.min.css"> --}}
 
     <!-- Main CSS File -->
     <link rel="stylesheet" href="assets/css/style.min.css">
     <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/js/bootstrap.min.js" defer></script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v20.0"
-        nonce="b8V6cTLP"></script>
+
 
 
 </head>
@@ -70,18 +71,18 @@
                         </ul>
                     </li> --}}
                     </ul>
-                     <form action="" class="d-flex w-50">
+                    <form action="" class="d-flex w-50">
                         <input class="form-control me-2" name="key" type="search" placeholder="Tìm kiếm"
                             aria-label="Search" value="{{ request()->key }}">
                         <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                     </form>
                     <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                         @if (Auth::check())
-                        <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link bi bi-calendar-check-fill" href="{{ route('transaction.history') }}"></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link bi bi-bag-check-fill" href="{{ route('cart.index') }}"></a>
+                                <a class="nav-link bi bi-cart-plus-fill" href="{{ route('cart.index') }}"></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link bi bi-heart-fill" href="{{ route('favoritebook.index') }}"></a>
@@ -144,26 +145,23 @@
     @section('footer')
 
         <div class="container-fluid mt-5"
-            style="margin-top: 50px;font-family: Verdana,Arial,Helvetica,sans-serif;background-color: #e3f2fd; ">
+            style="margin-top: 50px;font-family: Verdana,Arial,Helvetica,sans-serif;background-color: #ffffff; ">
             <footer class="row row-cols-5 py-5 my-0 border-top" style="margin-bottom: 0px;">
                 <div class="col">
-                    <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-                        <svg class="bi me-2" width="40" height="32">
-                            <use xlink:href="#bootstrap" />
-                        </svg>
-                    </a>
-                    <h5 class="ms-auto">Hổ trợ khách hàng</h5>
+
+                    <h5 class="ms-auto" style="font-weight: bold;">Hổ trợ khách hàng</h5>
                     <p>Email: 0306211076@caothang.edu.vn</p>
                     <p>Hotline: <b style="color: rgb(18, 91, 193)">0344312253</b></p>
                     {{-- <p class="text-muted">&copy; 2021</p> --}}
                 </div>
-
                 <div class="col">
 
                 </div>
 
+
+
                 <div class="col">
-                    <h5>Giới thiệu</h5>
+                    <h5 style="font-weight: bold;">Giới thiệu</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Trang chủ</a></li>
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Đặc trưng</a></li>
@@ -176,7 +174,7 @@
                 </div>
 
                 <div class="col">
-                    <h5>Tài khoản</h5>
+                    <h5 style="font-weight: bold;">Tài khoản</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Quên mật khẩu</a>
                         </li>
@@ -184,7 +182,20 @@
                                 Đăng nhập</a></li>
                     </ul>
                 </div>
-               
+
+                <div class="col">
+                    <h5 style="font-weight: bold;">Hướng dẫn</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Câu hỏi thường
+                                gặp</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">
+                                Phương thức thanh toán</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">
+                                Chính sách bảo mật thông tin</a></li>
+                    </ul>
+                </div>
+
 
             </footer>
 
@@ -201,7 +212,7 @@
                         <div style="text-align: center;">
                             Địa chỉ: 1926, Võ Văn Kiệt P. 16, Quận 8, TP. Hồ Chí Minh </div>
                         <div style="text-align: center;">
-                            &nbsp;
+                            <img src="{{ asset('asset/img/dathongbao-1.png') }}" alt="">
                         </div>
                     </div>
                 </div>

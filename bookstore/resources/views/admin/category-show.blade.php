@@ -8,18 +8,23 @@
 
 
 @section('content')
-    <dl>
-        <dt>Tên thể loại:</dt>
-        <dd>{{ $p->name }}</dd>
+<style>
+    label{
+        color: black;
+    }
+</style>
+    <dl style="margin-left: 20px">
+        <label>Tên thể loại:</label>
+        <label>{{ $p->name }}</label><br>
 
-        <dt>Mô tả:</dt>
-        <dd>{{ $p->description }}</dd>
+        <label>Mô tả:</label>
+        <label>{{ $p->description }}</label><br>
 
-        <dt>Thể loại:</dt>
-        <dd>{{ $p->name }}</dd>
+        <label>Thể loại:</label>
+        <label>{{ $p->name }}</label><br>
 
-        <dt>Ngày tạo:</dt>
-        <dd>{{ $p->created_at }}</dd>
+        <label>Ngày tạo:</label>
+        <label>{{ $p->created_at }}</label><br>
 
 
     </dl>

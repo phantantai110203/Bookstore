@@ -46,7 +46,7 @@
                                 <tr>
                                     <td>
                                         <li class="nav-item " style="border: 1px solid gray;">
-                                            <a class="nav-link"
+                                            <a class="nav-link" style="color: black"
                                                 href="{{ route('detail.category', $cat->slug) }}">{{ $cat->name }}</a>
                                         </li>
                                     </td>
@@ -70,9 +70,10 @@
                                                     onerror="this.src='asset/img/no_image_placeholder.png';" alt="...">
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ $p->name }}</h5>
-                                                    <p class="card-text hide-less">{{ $p->description }}</p>
+                                                    <p class="card-text hide-less" style="color: black">
+                                                        {{ $p->description }}</p>
                                             </a>
-                                           @if (Auth::check())
+                                            @if (Auth::check())
                                                 {{-- Người dùng đã đăng nhập --}}
                                                 <form action="{{ route('cart.add') }}" method="POST"
                                                     onsubmit="handleAddToCartAdd(event)">
@@ -80,8 +81,6 @@
                                                     <input type="hidden" name="book_id" value="{{ $p->id }}">
                                                     <input type="hidden" name="price" value="{{ $p->price }}">
                                                     <input type="hidden" name="quantity" value="1">
-                                                    <!-- Có thể thay đổi giá trị mặc định cho số lượng -->
-
                                                     <button type="submit"
                                                         class="btn btn-primary custom-btn bi bi-cart-check"> Thêm vào
                                                         giỏ</button>
@@ -91,12 +90,9 @@
                                                     @csrf
                                                     <input type="hidden" name="book_id" value="{{ $p->id }}">
                                                     <input type="hidden" name="price" value="{{ $p->price }}">
-
-                                                    <!-- Có thể thay đổi giá trị mặc định cho số lượng -->
-                                                    <button class="btn btn-outline-success favorite-btn" type="submit"><i
-                                                            class="far fa-heart "></i></button>
-
-
+                                                    <button class="btn btn-outline-success favorite-btn" type="submit">
+                                                        <i class="far fa-heart"></i>
+                                                    </button>
                                                 </form>
                                             @else
                                                 {{-- Người dùng chưa đăng nhập --}}
@@ -120,49 +116,73 @@
         width="600" height="400" style="border:0;margin-bottom: 5px;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-   <script>
+
+
+
+    <script>
         function handleAddToFavorite(event) {
             event.preventDefault();
             var form = event.target; // form hiện tại được click
             var book_id = form.elements.book_id.value;
             var price = form.elements.price.value;
+            var favoriteButton = form.querySelector('.favorite-btn');
             var data = {
                 book_id: book_id,
                 price: price
             };
-            // Gửi yêu cầu POST sử dụng Axios
-            axios.post('/favorite/add', data)
-                .then(function(response) {
-                    Swal.fire({
-                        position: "top",
-                        icon: "success",
-                        title: "Thêm thành công vào yêu thích",
-                        showConfirmButton: false,
-                        timer: 5000
-                    });
-                })
-                .catch(function(error) {
-                    // Xử lý lỗi
-                    console.error(error);
-                });
 
-            // Điều chỉnh vị trí hiển thị
-            var toast = Swal.getToasts();
-            if (toast) {
-                toast.style.setProperty("top", "50px");
+            if (favoriteButton.classList.contains('active')) {
+                // Bỏ yêu thích
+                axios.post('/favorite/remove', data)
+                    .then(function(response) {
+                        Swal.fire({
+                            position: "top",
+                            icon: "success",
+                            title: "Bỏ khỏi danh sách yêu thích",
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+
+                        favoriteButton.classList.remove('active');
+                        localStorage.removeItem('favorite-' + book_id);
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                    });
+            } else {
+                // Thêm vào yêu thích
+                axios.post('/favorite/add', data)
+                    .then(function(response) {
+                        Swal.fire({
+                            position: "top",
+                            icon: "success",
+                            title: "Thêm thành công vào yêu thích",
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+
+                        favoriteButton.classList.add('active');
+                        localStorage.setItem('favorite-' + book_id, 'active');
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                    });
             }
         }
 
-        function handleAddProduct(e) {
-            e.preventDefault();
-            alert('Thêm sản phẩm')
-        }
-
-
-
-
-
+        // Kiểm tra trạng thái yêu thích khi tải lại trang
+        document.addEventListener('DOMContentLoaded', function() {
+            var favoriteForms = document.querySelectorAll('form[action="{{ route('favoritebook.add') }}"]');
+            favoriteForms.forEach(function(form) {
+                var book_id = form.elements.book_id.value;
+                var favoriteButton = form.querySelector('.favorite-btn');
+                if (localStorage.getItem('favorite-' + book_id) === 'active') {
+                    favoriteButton.classList.add('active');
+                }
+            });
+        });
     </script>
+
     <script>
         function handleAddToCartAdd(event) {
             event.preventDefault();
@@ -184,7 +204,7 @@
                         icon: "success",
                         title: "Thêm thành công vào giỏ hàng",
                         showConfirmButton: false,
-                        timer: 5000
+                        timer: 1000
                     });
                 })
                 .catch(function(error) {
@@ -201,9 +221,16 @@
 
         function handleAddProduct(e) {
             e.preventDefault();
-            alert('Thêm sản phẩm')
+            alert('Thêm sản phẩm');
         }
     </script>
+
+
+
+
+
+
+
     <script>
         function handleAddToLogin(event) {
             Swal.fire({
@@ -225,38 +252,13 @@
 
 
 
+
+
     <!-- Đảm bảo jQuery được tải trước khi sử dụng -->
 
-    <script>
-        $(document).ready(function() {
-            $('#your-form').submit(function(e) {
-                e.preventDefault(); // Ngăn không cho form submit theo cách thông thường
 
-                // Lấy dữ liệu từ form
-                var formData = $(this).serialize();
-
-                // Lấy user_id của người dùng đã đăng nhập
-                // Sử dụng Auth::id() để lấy user_id của người dùng hiện tại
-
-                // Gửi yêu cầu AJAX
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ route('favoritebook.add') }}', // Đường dẫn route bạn đã định nghĩa ở trên
-                    data: {
-                        formData,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        alert(response.message);
-                    },
-                    error: function(response) {
-                        alert(response.error);
-                    }
-                });
-            });
-        });
-    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
 
     </div>

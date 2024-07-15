@@ -4,7 +4,7 @@
 
 @section('navbar')
     @parent
-    <section class="py-5 ">
+    <section class="py-5 " style="margin-top:20px">
         <div class="container">
             <div class="row gx-5">
                 <aside class="col-lg-6 mt-4">
@@ -36,43 +36,32 @@
 
                         <div class="row mb-4">
                             <div class="col-md-4 col-6">
-                                <label class="mb-2">Loại</label>
-                                <select class="form-select border border-secondary" style="height: 35px;">
-                                    @foreach ($cats as $c)
-                                        @if ($c->id == $book->category_id)
-                                            <option>{{ $c->name }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                <label class="mb-2">Loại:</label>
+
+                                @foreach ($cats as $c)
+                                    @if ($c->id == $book->category_id)
+                                        <input style="height: 35px; border-radius: 3px"
+                                            type="text" value="{{ $c->name }}" readonly>
+                                    @endif
+                                @endforeach
+
                             </div>
                             <!-- col.// -->
-                            <div class="col-md-4 col-6 mb-3">
-                                <label class="mb-2 d-block">Số lượng</label>
-                                <div class="input-group mb-3" style="width: 170px;">
-                                    {{-- <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
-              <i class="fas fa-minus"></i>
-            </button> --}}
-                                    <input type="text" class="form-control text-center border border-secondary"
-                                        placeholder="{{ $book->quality }}" aria-label="Example text with button addon"
-                                        aria-describedby="button-addon1" />
-                                    {{-- <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
-              <i class="fas fa-plus"></i>
-            </button> --}}
-                                </div>
-                            </div>
+
                         </div>
                         <div class="button-container">
 
                             @if (Auth::check())
-                            <form action="{{ route('favoritebook.add') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="book_id" value="{{ $book->id }}">
-                                                    <input type="hidden" name="price" value="{{ $book->price }}">
+                                <form action="{{ route('favoritebook.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="book_id" value="{{ $book->id }}">
+                                    <input type="hidden" name="price" value="{{ $book->price }}">
 
-                                                    <!-- Có thể thay đổi giá trị mặc định cho số lượng -->
-                                                     <button class="btn btn-outline-success favorite-btn-dt" type="submit" onclick="alert('Đã thêm thành công')"><i class="far fa-heart "></i></button>
+                                    <!-- Có thể thay đổi giá trị mặc định cho số lượng -->
+                                    <button class="btn btn-outline-success favorite-btn-dt" type="submit"
+                                        onclick="alert('Đã thêm thành công')"><i class="far fa-heart "></i></button>
 
-                                                </form>
+                                </form>
                                 {{-- Người dùng đã đăng nhập --}}
                                 <form action="{{ route('cart.add') }}" method="POST">
                                     @csrf
@@ -101,19 +90,18 @@
             <div class="px-0 border rounded-2 shadow-0">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"></h5>
+                        <h5 class="card-title">Sản phẩm có liên quan</h5>
                         <div class="row row-cols-4">
                             @foreach ($lst as $p)
                                 @if ($p->id != $book->id)
                                     <div class="col">
                                         <div class="d-flex mb-3">
-                                            <a href="{{ route('detail.book', ['book' => $p]) }}" class="me-3">
-                                                <img src={{ $p->img  }}
-
-                                                    style="width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                                            <a  href="{{ route('detail.book', ['book' => $p]) }}" class="me-3">
+                                                <img src={{ $p->img }} style="width: 96px; height: 96px;"
+                                                    class="img-md img-thumbnail" />
                                             </a>
                                             <div class="info">
-                                                <a href="#" class="nav-link mb-1">
+                                                <a style="color: black" href="#" class="nav-link mb-1">
                                                     {{ $p->name }}<br />
                                                     @foreach ($aut as $a)
                                                         @if ($a->id == $p->author_id)
@@ -143,7 +131,7 @@
                     @if (Auth::check())
                         <form action="{{ route('add.comment', $book->id) }}" method="post">
                             @csrf
-                            <input type="text" class="form-control" name="comment" placeholder="What are you thinking?"
+                            <input type="text" class="form-control" name="comment" placeholder="Hãy bình luận cảm nhận của bạn"
                                 autofocus>
                             <div class="mar-top clearfix">
                                 <button class="btn btn-sm btn-primary pull-right" type="submit"><i

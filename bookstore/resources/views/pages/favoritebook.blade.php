@@ -38,15 +38,10 @@
                                 <td class="actions" data-th="">
                                     <a href="{{ route('detail.book', ['book' => $p]) }}"><button
                                             class="btn btn-info btn-sm">
-                                            <i class="bi bi-pencil-square"></i>
+                                            <i class="bi bi-eye-fill"></i>
                                                 </button>
                                     </a>
-                                    <form action="{{ route('favoritebook.destroy', ['id' => $p->id]) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">  <i
-                                                class="fa fa-trash"></i></button>
-                                    </form>
+                                    
                                 </td>
                             @endif
                         </tr>

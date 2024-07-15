@@ -8,29 +8,35 @@
 
 
 @section('content')
-    <dl>
-        <dt>Tên sách:</dt>
-        <dd>{{ $p->name }}</dd>
+<style>
+    label{
+        color: black;
+    }
+</style>
+    <dl style="margin-left:30px">
 
-        <dt>Tác giả:</dt>
-        <dd>{{ $p->Author->name }}</dd>
+        <label for="">Tên sách:</label>
+        <label>{{ $p->name }}</label><br>
 
-        <dt>Thể loại:</dt>
-        <dd>{{ $p->Category->name }}</dd>
+        <label>Tác giả:</label>
+        <label>{{ $p->Author->name }}</label><br>
 
-        <dt>Mô tả:</dt>
-        <dd>{{ $p->description }}</dd>
+        <label>Thể loại:</label>
+        <label>{{ $p->Category->name }}</label><br>
 
-        <dt>Ngày xuất bản:</dt>
-        <dd>{{ $p->publish_date }}</dd>
+        <label>Mô tả:</label>
+        <label>{{ $p->description }}</label><br>
 
-        <dt>Giá bán:</dt>
-        <dd>{{ $p->price }}</dd>
+        <label>Ngày xuất bản:</label>
+        <label>{{ $p->publish_date }}</label><br>
 
-        <dt>Số lượng còn lại:</dt>
-        <dd>{{ $p->quality }}</dd>
+        <label>Giá bán:</label>
+        <label>{{ $p->price }}</label><br>
 
-        <dt>Ảnh bìa:</dt>
+        <label>Số lượng còn lại:</label>
+        <label>{{ $p->quality }}</label>
+
+        <dt style="color: black">Ảnh bìa:</dt>
         <dd><img style="width: 100px;max-height: 100px;object-fit: contain" src="{{ $p->img }}" alt=""></dd>
     </dl>
     <a href="{{ route('books.index') }}">

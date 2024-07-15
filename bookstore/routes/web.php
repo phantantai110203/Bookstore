@@ -13,6 +13,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoritebookController;
 use App\Http\Controllers\InvoiceadminController;
+use App\Http\Controllers\InvoiceDetailAdminController;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/books', BookadminController::class);
         Route::resource('/invoices', InvoiceadminController::class);
         Route::get('oders',[InvoiceadminController::class, 'index'])->name('oders.index');
+        Route::get('/invoices/{invoice}', [InvoiceadminController::class,'show'])->name('invoices.detail');
         Route::resource('/category', CategoryController::class);
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -57,11 +59,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{user}', [UserController::class, 'detail'])->name('detail.index');
 
     //giỏ hàng
+    Route::get('/kiemtrathanhtoan',[CartController::class, 'thanhToan'])->name('kiemtrathanhtoan');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'create'])->name('cart.add');
     Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
     //comment
     Route::post('/comment/{book_id}', [CommentController::class, 'create'])->name('add.comment');
     Route::put('/comments/update/{id}', [CommentController::class, 'update'])->name('comments.update');
@@ -72,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/favorite/update/{id}', [FavoritebookController::class, 'update'])->name('favoritebook.update');
     Route::delete('/favorite/delete/{id}', [FavoritebookController::class, 'destroy'])->name('favoritebook.destroy');
     Route::delete('/favorite/{id}', [FavoritebookController::class, 'destroy'])->name('favoritebook.destroy');
+    Route::post('/favorite/remove', [FavoriteBookController::class, 'remove'])->name('favoritebook.remove');
 });
 
 //Khong can dang nhap
@@ -125,10 +130,28 @@ Route::get('slug/{slug}', function($slug){
 //     return view("pages.invoice-detail");
 Route::get('/transaction-history', [InvoiceController::class, 'transactionHistory'])->name('transaction.history');
 //vnpay
-Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay_payment');
+
+Route::post('/vnpay-return', [InvoiceController::class, 'vnpayReturn'])->name('vnpay_return');
+Route::post('/vnpay-payment', [InvoiceController::class, 'vnpayPayment'])->name('vnpay_payment');
 
 
 //payment
 
 Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
 Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
+
+//cart
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
+
+//trang lịch sử của user
+Route::get('/detail', function () {
+    return view('pages.invoice-detail');
+});
+Route::get('/invoicedetails/{id}', [InvoiceController::class, 'show'])->name('invoicedetails');
+Route::resource('/invoicedetails', InvoiceController::class);
+Route::post('/invoicedetails/{id}/cancel',  [InvoiceController::class ,'cancel'])->name('cancel.order');
+
+
+Route::post('/payment', [PaymentController::class, 'paymomo'])->name('payment.momo');
+Route::get('/momo/return', [PaymentController::class, 'handleReturn'])->name('momo.return');

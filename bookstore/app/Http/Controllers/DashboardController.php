@@ -37,6 +37,7 @@ class DashboardController extends Controller
         $userCount = User::count();
         $bookCount = Book::count();
         $oderCount = Invoice::count();
+        $totalRevenue = Invoice::sum('total');
 
         // Lấy doanh thu của ngày hôm nay
         $today = Carbon::today();
@@ -45,6 +46,7 @@ class DashboardController extends Controller
             'latestOrders' => $latestOrders,
             'monthlyRevenue' => $revenueData,
             'todayRevenue' => $todayRevenue,
+            'totalRevenue'=> $totalRevenue
         ]);
     }
 

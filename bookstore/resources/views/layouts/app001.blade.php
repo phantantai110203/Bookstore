@@ -23,7 +23,8 @@
         rel="stylesheet"> --}}
 
     <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="/backend-admin/all.min.css">
+
+    <link rel="stylesheet" href="/backend-admin/css/adminlte.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/backend-admin/css/bootstrap-icons.css">
@@ -57,7 +58,7 @@
 
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
+        <div class="sidebar pe-4 pb-3" style="width: 20%; margin-left:0px;" >
             <nav class="navbar bg-secondary navbar-dark">
                 <a href="{{ route('dashboard') }}" class="navbar-brand mx-4 mb-3">
                     <h3><i class="fa fa-user-edit me-2"></i>BookStore</h3>
@@ -98,10 +99,10 @@
                     <a href="{{ route('invoices.index') }}" class="nav-link" style="color: white"><i
                             class="fa fa-table me-2"></i>Quản lý hóa đơn</a>
                     <a href="{{ route('category.index') }}" class="nav-link" style="color: white"><i
-                            class="fas fa-pen-nib"></i>Quản
+                            class="fas fa-pen-nib me-2"></i>Quản
                         lý thể loại</a>
-                    <a href="#" class=" nav-link" style="color: white"><i class="fas fa-comment-alt"></i>Quản lý
-                        bình luận</a>
+                    {{-- <a href="#" class=" nav-link" style="color: white"><i class="fas fa-comment-alt"></i>Quản lý
+                        bình luận</a> --}}
                     {{-- <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Thống kê</a> --}}
                     {{-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i
@@ -151,7 +152,7 @@
 
             <!-- Blank Start -->
 
-            <div class="container" style="background-color:#f4f6f9">
+            <div  style="background-color:#f4f6f9; margin-left:20px; margin-top:10px">
                 @yield('content')
             </div>
             <!-- Blank End -->

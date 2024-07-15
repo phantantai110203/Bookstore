@@ -93,4 +93,20 @@ class FavoritebookController extends Controller
         // Chuyển hướng trở lại với thông báo lỗi nếu không tìm thấy mục
         return redirect()->back()->with('error', ' favoritebook Items item not found');
     }
+
+    public function remove(Request $request)
+    {
+        $bookId = $request->input('book_id');
+        $userId = auth()->user()->id;
+
+        // Tìm và xóa bản ghi yêu thích
+        $favorite = FavoriteBook::where('book_id', $bookId)->where('user_id', $userId)->first();
+
+        if ($favorite) {
+            $favorite->delete();
+            return response()->json(['message' => 'Removed from favorites successfully'], 200);
+        }
+
+        return response()->json(['message' => 'Favorite not found'], 404);
+    }
 }

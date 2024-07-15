@@ -23,7 +23,7 @@
 
 <body>
 
-    <h1>Web bán sách BookDor</h1>
+    <h1>Web bán sách BookStore</h1>
     <div class="w3layoutscontaineragileits">
         <h2>Đăng ký</h2>
         <form method="post" action="{{ route('register') }}">

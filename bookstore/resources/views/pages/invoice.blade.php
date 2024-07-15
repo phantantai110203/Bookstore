@@ -14,7 +14,7 @@
                     <div class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">Họ</label>
+                                <label for="firstName">Họ(*)</label>
                                 <input type="text" name="firstName" class="form-control" id="firstName" placeholder value
                                     required>
                                 <div class="invalid-feedback">
@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="lastName">Tên</label>
+                                <label for="lastName">Tên(*)</label>
                                 <input type="text" name="user_firstName" class="form-control" id="lastName" placeholder
                                     value required>
                                 <div class="invalid-feedback">
@@ -63,7 +63,7 @@
                         <div class="mb-3">
                             <label for="phone">Số điện thoại(*) <span class="text-muted"></span></label>
                             <input type="text" name="ShippingPhone" class="form-control" id="phone"
-                                placeholder="---">
+                                value="{{ Auth::user()->phone }}" readonly>
                         </div>
                         <a class="mb-3">Tổng tiền: {{ number_format($total, 0, ',', '.') }} VNĐ</a>
                         <input type="hidden" name="total" value="{{ $total }}">
@@ -87,7 +87,7 @@
                         </div>
 
                         <hr class="mb-4">
-                        <form method="POST"  action="{{ route('invoice.store') }}">
+                        <form method="POST" action="{{ route('invoice.store') }}">
                             @csrf
                             <!-- Invoice form details... -->
                             <button onclick="handleAddToInvoice(event)" class="btn btn-primary btn-lg btn-block mb-2"
@@ -96,13 +96,12 @@
                             {{-- <button type="button" onclick="submitAndRedirect()">Submit và Chuyển Hướng</button> --}}
                             <input type="hidden" name="addressSelect" id="addressSelect">
                         </form>
-                        <form action="{{ route('vnpay_payment') }}" method="POST">
+                        <form action="{{ route('payment.momo') }}" method="POST">
                             @csrf
                             <input type="hidden" name="total" value="{{ $total }}">
-                            <button type="submit" name="redirect" class="btn btn-dark primary-btn invoive-btn"
-                                style="width:50%">Thanh
-                                toán VNPAY <i class="fab fa-cc-visa"></i>
-                            </button>
+                            <input type="hidden" name="count_invoice" value="{{ 'HD'.$count_invoice+1 }}">
+                            <button type="submit"  class="btn btn-dark primary-btn invoive-btn" style="width:50%">Thanh
+                                toán MOMO <i class="fab fa-cc-visa"></i></button>
                         </form>
 
                         <input type="hidden" name="addressSelect" id="addressSelect">

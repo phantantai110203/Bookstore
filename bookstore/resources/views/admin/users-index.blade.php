@@ -8,8 +8,94 @@
 
 
 @section('content')
+    <style>
+        td,
+        th {
+            color: black
+        }
 
-    <h1 style="text-align: center; color:black;"> Danh sách tài khoản </h1>
+        .card-title {
+            font-weight: bold;
+        }
+    </style>
+
+    <!-- Default box -->
+    <div class="card" style="margin-left: 20px">
+        <div class="card-header">
+            <h3 class="card-title" style="color: black">Danh sách người dùng</h3>
+
+            <div class="card-tools">
+                <div class="input-group-append">
+                    <a href="{{ route('users.create') }}" class="btn btn-info">
+                        Thêm tài khoản <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th style="width: 1%">
+                            #
+                        </th>
+                        <th style="width: 10%">
+                            Tên
+                        </th>
+                        <th style="width: 20%">
+                            Email
+                        </th>
+                        <th style="width: 20%">
+                            Địa chỉ
+                        </th>
+                        <th style="width: 12%">
+                            Số điện thoại
+                        </th>
+
+                        <th style="width: 8%">
+                            Chức vụ
+                        </th>
+                        <th style="width: 20%">
+                            Chức năng
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($lst as $p)
+                        <tr>
+                        <tr>
+                            <td>{{ ++$i }}</td>
+                            <td>{{ $p->name }}</td>
+                            <td>{{ $p->email }}</td>
+                            <td>{{ $p->address }}</td>
+                            <td>{{ $p->phone }}</td>
+                            <td>{{ $p->role ? 'Admin' : 'Khách hàng' }}</td>
+                            <td style="ma">
+                                <a href="{{ route('users.show', ['user' => $p]) }}" class="btn btn-dark">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                                <a href="{{ route('users.edit', ['user' => $p]) }}" class="btn btn-success">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="post" action="{{ route('users.destroy', ['user' => $p]) }}" class="d-inline"
+                                    onsubmit="return confirm('Bạn có muốn xóa không')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-warning"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+    {{-- <h1 style="text-align: center; color:black;"> Danh sách tài khoản </h1>
     <a href="{{ route('users.create') }}" class="btn btn-info" >
         Thêm tài khoản <i class="fas fa-plus"></i>
     </a>
@@ -52,7 +138,7 @@
                 </tr>
             @endforeach
         </tbody>
-    </table>
+    </table> --}}
     <!-- Button trigger modal -->
     {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
@@ -60,12 +146,13 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" >
+    <div class="modal fade" id="exampleModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh sửa thông tin</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
                 </div>
                 <div class="modal-body">
                     <form method="post" action="{{ route('users.update', ['user' => $p]) }}"
