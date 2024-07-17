@@ -36,7 +36,7 @@
                                             onerror="this.src='/asset/img/no_image_placeholder.png';">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $p->name }}</h5>
-                                            <p class="card-text hide-less">{{ $p->description }}</p>
+                                            <p style="color: black" class="card-text hide-less">{{ $p->description }}</p>
                                     </a>
 
 

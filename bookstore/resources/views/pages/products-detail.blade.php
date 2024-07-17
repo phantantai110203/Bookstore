@@ -9,7 +9,7 @@
             <div class="row gx-5">
                 <aside class="col-lg-6 mt-4">
                     <div class="border rounded-4 mb-3 d-flex justify-content-center" style="position: relative;">
-                        <img src="{{ $book->img }}" onerror="this.src='/asset/img/no_image_placeholder.png';"
+                        <img src="{{ $book->img }}"
                             class="d-block " style="width: auto; height: 427px;" alt="...">
                     </div>
                     <!-- thumbs-wrap.// -->
@@ -200,5 +200,47 @@
             </div>
         </div>
     </div>
+
+     <script>
+        function handleAddToCartAdd(event) {
+            event.preventDefault();
+            var form = event.target; // form hiện tại được click
+            var book_id = form.elements.book_id.value;
+            var price = form.elements.price.value;
+            var quantity = form.elements.quantity.value;
+            var data = {
+                book_id: book_id,
+                price: price,
+                quantity: quantity
+            };
+
+            // Gửi yêu cầu POST sử dụng Axios
+            axios.post('/cart/add', data)
+                .then(function(response) {
+                    Swal.fire({
+                        position: "top",
+                        icon: "success",
+                        title: "Thêm thành công vào giỏ hàng",
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                })
+                .catch(function(error) {
+                    // Xử lý lỗi
+                    console.error(error);
+                });
+
+            // Điều chỉnh vị trí hiển thị
+            var toast = Swal.getToasts();
+            if (toast) {
+                toast.style.setProperty("top", "50px");
+            }
+        }
+
+        function handleAddProduct(e) {
+            e.preventDefault();
+            alert('Thêm sản phẩm');
+        }
+    </script>   
 
 @endsection

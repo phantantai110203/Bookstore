@@ -44,7 +44,7 @@ class CartController extends Controller
             ]);
         }
 
-        return response()->json(['message' => 'Item added to cart successfully']);
+        return redirect()->back()->with('success', 'book added to cart successfully.');
     }
 
     protected function fixImage(Book $p)

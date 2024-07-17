@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Category;
 use App\Models\Book;
 use App\Models\Author;
@@ -32,6 +33,7 @@ class HomeController extends Controller
         $cats = Category::orderBy('name', 'ASC')->get();
         $aut = Author::orderBy('name', 'ASC')->get();
         $lst = Book::where('category_id', $book->category_id)->limit(4)->get();
+
         foreach ($lst as $p) {
             $this->fixImage($p);
         }
@@ -50,7 +52,7 @@ class HomeController extends Controller
         foreach ($book as $p) {
             $this->fixImage($p);
         }
-        return view('pages.category', compact('cats','cat', 'book'));
+        return view('pages.category', compact('cats', 'cat', 'book'));
     }
     // public function categoryapp()
     // {

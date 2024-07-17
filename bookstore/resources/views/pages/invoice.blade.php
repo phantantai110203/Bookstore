@@ -81,7 +81,7 @@
                             <div class="custom-control custom-radio">
                                 <input id="debit" name="invoiceMethod" type="radio" class="custom-control-input"
                                     required>
-                                <label class="custom-control-label" for="debit">Thanh toán qua VNPAY</label>
+                                <label class="custom-control-label" for="debit">Thanh toán qua MoMo</label>
                                 <a href="#" id="myLink" style="display: none;">Đây là một liên kết</a>
                             </div>
                         </div>
