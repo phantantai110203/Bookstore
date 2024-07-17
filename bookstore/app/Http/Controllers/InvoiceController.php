@@ -82,8 +82,7 @@ class InvoiceController extends Controller
     {
         // Validate the form data
         $request->validate([
-            'firstName' => 'required|string|max:255',
-            'user_firstName' => 'required|string|max:255',
+
             'name' => 'required|string|max:255',
             'user_email' => 'required|email',
             'ShippingAddress' => 'required|string|max:255',
@@ -121,34 +120,21 @@ class InvoiceController extends Controller
 
         return redirect()->route('index')->with('success', 'Invoice created successfully!');
 
-        // $user_id = Auth::id();
-        // $carts = Cart::where('user_id', $user_id)->get();
-        // $total = 0;
 
-        // foreach ($carts as $cart) {
-        //     $total += $cart->quantity * $cart->price;
-        // }
-
-        // // Set Total to
-        // $invoice->total = $total;
-
-
-
-        // $invoice->save();
-        // return redirect()->back()->with('success', 'book added to cart successfully.');
 
 
     }
     public function transactionHistory()
     {
         $userId = Auth::id();
-        $invoices = Invoice::where('user_id', $userId)->with('invoicedetails.book')->get();
-        // $invoicedetails=InvoiceDetail::where('user_id', $userId);
-        //
 
+       
+        $invoices = Invoice::where('user_id', $userId)
+            ->with('invoicedetails.book')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        // dd($invoices[0]->invoicedetails[0]->Book);
-
+        // Truyền dữ liệu qua view
         return view('pages.history', compact('invoices', 'userId'));
     }
 

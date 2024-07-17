@@ -11,7 +11,7 @@
                 <thead>
                     <tr>
                         <th>Mã đơn hàng</th>
-                        <th>Ngày tạo</th>
+                        <th>Ngày mua hàng</th>
                         <th>Tổng tiền</th>
                         <th>Chi tiết</th>
                     </tr>

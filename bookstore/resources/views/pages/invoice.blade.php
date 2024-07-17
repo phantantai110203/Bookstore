@@ -1,35 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'Trang chủ')
+@section('title', 'Thanh toán')
 
 @section('navbar')
     @parent
 
-    <form style="margin-top:20px" method="POST" action="{{ route('invoice.store') }}" id="myForm">
+    <form style="margin-top:20px" method="POST" action="{{ route('invoice.store') }}" id="form1" >
         @csrf
         <div class="container invoice mt-5">
             <div class="row">
                 <div class="col-md-4 order-md-1">
                     <h4 class="mb-3" style="margin-top: 20px;">Địa chỉ giao hàng</h4>
-                    <div class="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">Họ(*)</label>
-                                <input type="text" name="firstName" class="form-control" id="firstName" placeholder value
-                                    required>
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="lastName">Tên(*)</label>
-                                <input type="text" name="user_firstName" class="form-control" id="lastName" placeholder
-                                    value required>
-                                <div class="invalid-feedback">
-                                    Valid last name is required.
-                                </div>
-                            </div>
-                        </div>
+                    <div class="needs-validation">
+
 
                         <div class="mb-3">
                             <label for="username">Tên tài khoản(*) </label>
@@ -37,8 +20,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
                                 </div>
-                                <input type="text" name="name" class="form-control" id="username"
-                                    value="{{ Auth::user()->name }}" placeholder="Tên tài khoản!" required>
+                                <input type="text" name="name" class="form-control" id="name"
+                                    placeholder="Tên tài khoản!" required>
                                 <div class="invalid-feedback" style="width: 100%;">
                                     Your username is required.
                                 </div>
@@ -47,14 +30,14 @@
                         <div class="mb-3">
                             <label for="email">Email(*) <span class="text-muted"></span></label>
                             <input type="email" name="user_email" class="form-control" id="email"
-                                value="{{ Auth::user()->email }}" placeholder=" Vui lòng nhập email! ">
+                                 placeholder=" Vui lòng nhập email! ">
                             <div class="invalid-feedback">
                                 Please enter a valid email address shipping updates.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="address">Địa chỉ nhà(*)</label><input type="text" name="ShippingAddress"
-                                class="form-control" id="address" value="{{ Auth::user()->address }}"
+                                class="form-control" id="address"
                                 placeholder="Vui lòng nhập địa chỉ!" required>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
@@ -63,7 +46,7 @@
                         <div class="mb-3">
                             <label for="phone">Số điện thoại(*) <span class="text-muted"></span></label>
                             <input type="text" name="ShippingPhone" class="form-control" id="phone"
-                                value="{{ Auth::user()->phone }}" readonly>
+                                 >
                         </div>
                         <a class="mb-3">Tổng tiền: {{ number_format($total, 0, ',', '.') }} VNĐ</a>
                         <input type="hidden" name="total" value="{{ $total }}">
@@ -96,9 +79,12 @@
                             {{-- <button type="button" onclick="submitAndRedirect()">Submit và Chuyển Hướng</button> --}}
                             <input type="hidden" name="addressSelect" id="addressSelect">
                         </form>
-                        <form action="{{ route('payment.momo') }}" method="POST">
+                        <form action="{{ route('payment.momo') }}" method="POST" id="form2">
                             @csrf
                             <input type="hidden" name="total" value="{{ $total }}">
+                            <input type="text" id="name2" name="name">
+                            <input type="text" id="address2" name="ShippingAddress">
+                            <input type="text" id="phone2" name="ShippingPhone">
                             <input type="hidden" name="count_invoice" value="{{ 'HD'.$count_invoice+1 }}">
                             <button type="submit"  class="btn btn-dark primary-btn invoive-btn" style="width:50%">Thanh
                                 toán MOMO <i class="fab fa-cc-visa"></i></button>
@@ -170,13 +156,12 @@
 
             event.preventDefault();
             // Kiểm tra thông tin
-            let firstName = document.getElementById('firstName').value;
-            let lastName = document.getElementById('lastName').value;
+
             let username = document.getElementById('username').value;
             let email = document.getElementById('email').value;
             let address = document.getElementById('address').value;
 
-            if (firstName === '' || lastName === '' || username === '' || email === '' || address === '') {
+            if ( username === '' || email === '' || address === '') {
                 // Nếu thông tin chưa đầy đủ, hiển thị thông báo lỗi
                 Swal.fire({
                     position: 'top',
@@ -200,18 +185,23 @@
         }
     </script>
 
-    <script>
-        function submitAndRedirect() {
-            // Lấy ra form
-            var form = document.getElementById('myForm');
+</script>
+<!-- Trong phần JavaScript -->
+<script>
+    // Lắng nghe sự kiện khi giá trị của các input thay đổi
+    document.getElementById('name').addEventListener('input', syncInputs);
+    document.getElementById('address').addEventListener('input', syncInputs);
+    document.getElementById('phone').addEventListener('input', syncInputs);
 
-            // Thực hiện submit form
-            form.submit();
+    // Hàm để đồng bộ dữ liệu
+    function syncInputs() {
+        document.getElementById('name2').value = document.getElementById('name').value;
+        document.getElementById('address2').value = document.getElementById('address').value;
+        document.getElementById('phone2').value = document.getElementById('phone').value;
+    }
+</script>
 
-            // Chuyển hướng trang sau khi submit thành công
-            window.location.href = '{{ route('payment.index') }}';
 
-            // Lưu ý: Cần chắc chắn rằng trang mà bạn định chuyển hướng đến là một trang thực tế tồn tại và đang hoạt động.
-        }
-    </script>
+
+
 @endsection

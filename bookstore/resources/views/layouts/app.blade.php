@@ -203,9 +203,7 @@
             <div style="text-align: center;padding-top: 0.5px;">
                 <div class="block " id="content_FooterAddress">
                     <div class="blockcontent">
-                        <div style="text-align: center;">
-                            bookstore.vn
-                        </div>
+                        
                         <div style="text-align: center;">
                             &nbsp;
                         </div>
