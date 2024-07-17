@@ -21,7 +21,7 @@
                                     <span class="input-group-text">@</span>
                                 </div>
                                 <input type="text" name="name" class="form-control" id="name"
-                                    placeholder="Tên tài khoản!" required>
+                                    placeholder="Tên tài khoản!" required value="{{ Auth::user()->name }}" >
                                 <div class="invalid-feedback" style="width: 100%;">
                                     Your username is required.
                                 </div>
@@ -30,7 +30,7 @@
                         <div class="mb-3">
                             <label for="email">Email(*) <span class="text-muted"></span></label>
                             <input type="email" name="user_email" class="form-control" id="email"
-                                 placeholder=" Vui lòng nhập email! ">
+                                 placeholder=" Vui lòng nhập email! " value="{{ Auth::user()->email }}" >
                             <div class="invalid-feedback">
                                 Please enter a valid email address shipping updates.
                             </div>
@@ -38,7 +38,7 @@
                         <div class="mb-3">
                             <label for="address">Địa chỉ nhà(*)</label><input type="text" name="ShippingAddress"
                                 class="form-control" id="address"
-                                placeholder="Vui lòng nhập địa chỉ!" required>
+                                placeholder="Vui lòng nhập địa chỉ!" required value="{{ Auth::user()->address }}" >
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
@@ -46,7 +46,7 @@
                         <div class="mb-3">
                             <label for="phone">Số điện thoại(*) <span class="text-muted"></span></label>
                             <input type="text" name="ShippingPhone" class="form-control" id="phone"
-                                 >
+                                value="{{ Auth::user()->phone }}" readonly>
                         </div>
                         <a class="mb-3">Tổng tiền: {{ number_format($total, 0, ',', '.') }} VNĐ</a>
                         <input type="hidden" name="total" value="{{ $total }}">

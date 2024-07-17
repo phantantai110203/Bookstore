@@ -37,7 +37,7 @@
                 <li>
                     <input type="checkbox" id="brand1" value="">
 
-                    <a href="#">Quên mật khẩu?</a>
+                    
                 </li>
             </ul>
             <div class="aitssendbuttonw3ls">

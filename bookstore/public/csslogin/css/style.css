@@ -268,7 +268,7 @@ h6 {
 input[name="name"],
 input[type="text"],
 input[name="password"],
-input[name="email"] {
+input[name="email"]{
     width: 84%;
     padding: 15px 10px 15px;
     font-size: 14px;

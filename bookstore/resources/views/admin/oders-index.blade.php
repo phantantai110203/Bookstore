@@ -151,15 +151,16 @@
                             <td>{{ \Carbon\Carbon::parse($p['created_at'])->format('d/m/Y') }}</td>
                             <td>{{ $formattedAmount }}</td>
                             <td>
-                                <form>
+                               <form>
                                     @csrf
                                     <select style="border-radius: 8px; font-family: Arial, Helvetica, sans-serif"
                                         name="status" class="status-select" data-id="{{ $p->id }}">
-                                        <option value="{{ $p->status }}">{{ $p->status }}</option>
-                                        <option value="Đang chuẩn bị">Đang chuẩn bị</option>
-                                        <option value="Đã huỷ">Đã huỷ</option>
-                                        <option value="Đang giao">Đang giao</option>
-                                        <option value="Đã hoàn thành">Đã hoàn thành</option>
+                                        <option value="Đang chuẩn bị" {{ $p->status == 'Chờ xác nhận' ? 'selected' : '' }}>Chờ xác nhận</option>
+                                        <option value="Đang chuẩn bị" {{ $p->status == 'Đang chuẩn bị' ? 'selected' : '' }}>Đang chuẩn bị</option>
+                                        <option value="Đã hủy" {{ $p->status == 'Đã hủy' ? 'selected' : '' }}>Đã hủy</option>
+                                        <option value="Đang giao" {{ $p->status == 'Đang giao' ? 'selected' : '' }}>Đang giao</option>
+                                        <option value="Đã hoàn thành" {{ $p->status == 'Đã hoàn thành' ? 'selected' : '' }}>Đã hoàn thành</option>
+
                                     </select>
                                 </form>
                             </td>
@@ -187,6 +188,8 @@
                 var orderId = $(this).data('id'); // Lấy ID đơn hàng
                 var newStatus = $(this).val(); // Lấy trạng thái mới được chọn
 
+                var selectElement = $(this); // Lưu trữ phần chọn trạng thái
+
                 $.ajax({
                     url: '{{ route('thayDoiTrangThaiDonHang') }}', // URL script PHP để cập nhật trạng thái
                     method: 'POST', // Gửi yêu cầu POST
@@ -197,6 +200,9 @@
                     },
                     success: function(response) {
                         alert(response.message);
+
+                        // Sau khi cập nhật thành công, ẩn phần tử option có giá trị newStatus
+                        selectElement.find('option[value="' + newStatus + '"]').hide();
                     },
                     error: function(response) {
                         alert(response.error);
@@ -206,5 +212,45 @@
 
         });
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const statusSelects = document.querySelectorAll('.status-select');
+
+        statusSelects.forEach(statusSelect => {
+            const options = statusSelect.querySelectorAll('option');
+
+            // Function to hide options with a value less than the selected value
+            function hideOptions() {
+                const selectedValue = statusSelect.value;
+
+                options.forEach(option => {
+                    if (selectedValue === "Đã hoàn thành") {
+                        // Hide all options except "Đã hoàn thành"
+                        if (option.value !== "Đã hoàn thành") {
+                            option.style.display = 'none';
+                        } else {
+                            option.style.display = 'block';
+                        }
+                    } else {
+                        // Hide options with a value less than the selected value
+                        if (option.value < selectedValue) {
+                            option.style.display = 'none';
+                        } else {
+                            option.style.display = 'block';
+                        }
+                    }
+                });
+            }
+
+            // Call the function to hide options when the page loads
+            hideOptions();
+
+            // Also update the options visibility when the selection changes
+            statusSelect.addEventListener('change', hideOptions);
+        });
+    });
+</script>
+
+
 
 @endsection

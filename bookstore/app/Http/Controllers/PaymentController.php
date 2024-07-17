@@ -90,6 +90,7 @@ class PaymentController extends Controller
         $user = Auth::user();
         $carts = Cart::where('user_id', $user->id)->get();
 
+
         // Tính tổng tiền giỏ hàng
         $total = 0;
         foreach ($carts as $cart) {
@@ -102,31 +103,35 @@ class PaymentController extends Controller
 
         if ($resultCode == 0) {
 
-            // $invoice = Invoice::create([
-            //    // Mã hóa đơn tự tạo
-            //     'name' => $request->name,
-            //     'total' => $total,
-            //     'ShippingAddress' => $request->ShippingAddress,
-            //     'ShippingPhone' => $request->ShippingPhone ,
-            //     'status' => 'Chờ xác nhận',
-            //     'user_id'=> Auth::user()->id
-            // ]);
-            $invoice = new Invoice();
+            $invoice = Invoice::create([
+                // Mã hóa đơn tự tạo
+                'name' => $user->name,
+                'total' => $total,
+                'ShippingAddress' => $user->address,
+                'ShippingPhone' => $user->phone,
+                'status' => 'Chờ xác nhận',
+                'user_id' => Auth::user()->id
+            ]);
+            // $invoice = new Invoice();
 
-            $invoice->name = $request->name;
-            $invoice->ShippingAddress = $request->ShippingAddress;
-            $invoice->ShippingPhone = $request->ShippingPhone;
-            // $invoice->payment_method = $request->invoiceMethod;
-            $invoice->total = $total; // Make sure to pass the total amount in the form
-            $invoice->user_id = Auth::id();
-            $invoice->status = 'Chờ xác nhận';
-            $invoice->save();
+            // $invoice->name = $request->input('name');
+            // $invoice->ShippingAddress = $request->input('ShippingAddress');
+            // $invoice->ShippingPhone = $request->input('ShippingPhone');
+
+            // // $invoice->payment_method = $request->invoiceMethod;
+            // $invoice->total = $total; // Make sure to pass the total amount in the form
+            // $invoice->user_id = Auth::id();
+            // $invoice->status = 'Chờ xác nhận';
+            // $invoice->save();
+
+            $carts = Cart::where('user_id', Auth::id())->get(); // Assuming you have a Cart model
 
             foreach ($carts as $cart) {
-                InvoiceDetail::create([
-                    'invoice_id' => $invoice->id, // Link to the created invoice
-                    'book_id' => 1, // Link to the product detail
-                    'quantity' => 1, // Quantity of the product
+
+                $invoiceDetail = InvoiceDetail::create([
+                    'invoice_id' => $invoice->id,
+                    'book_id' => $cart->book_id,
+                    'quantity' => $cart->quantity,
 
                 ]);
             }
@@ -206,5 +211,5 @@ class PaymentController extends Controller
     {
         //
 
-   }
+    }
 }

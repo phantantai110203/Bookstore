@@ -119,10 +119,10 @@
                                     <a href="{{ route('detail.index', Auth::user()->id) }}" class="dropdown-item">Thông
                                         tin
                                         cá nhân</a>
-                                    <a href="#" class="dropdown-item">Cài đặt</a>
+
                                     <form class="dropdown-item" method="post" action="{{ route('logout') }}">
                                         @csrf
-                                        <input type="submit" value="Đăng xuất">
+                                        <input style="border: none; background-color: #6c757d" type="submit" value="Đăng xuất">
                                     </form>
                                 </div>
                             @else
@@ -203,7 +203,7 @@
             <div style="text-align: center;padding-top: 0.5px;">
                 <div class="block " id="content_FooterAddress">
                     <div class="blockcontent">
-                        
+
                         <div style="text-align: center;">
                             &nbsp;
                         </div>

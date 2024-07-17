@@ -36,7 +36,12 @@ class InvoiceadminController extends Controller
         }
 
         if ($startDate && $endDate) {
-            $latestOrders->whereBetween('created_at', [$startDate, $endDate]);
+            // Thêm 1 ngày vào ngày kết thúc
+            $endDate = date('Y-m-d', strtotime($endDate . ' +1 day'));
+
+            // Sử dụng where thay vì whereBetween
+            $latestOrders->where('created_at', '>=', $startDate)
+                ->where('created_at', '<', $endDate);
         }
 
         if ($invoiceId) {

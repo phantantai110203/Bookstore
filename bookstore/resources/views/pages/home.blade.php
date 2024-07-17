@@ -66,7 +66,7 @@
                                     <div class="col">
                                         <div class="card mt-3 size-card">
                                             <a href="{{ route('detail.book', $p->id) }}">
-                                                <img src=" {{ $p->img }}" class="card-img-top size-img"
+                                                <img src=" {{  asset($p->img) }}" class="card-img-top size-img"
                                                      alt="...">
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ $p->name }}</h5>

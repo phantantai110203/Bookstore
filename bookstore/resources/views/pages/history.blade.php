@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Trang chủ')
+@section('title', 'Lịch sử mua hàng')
 
 @section('navbar')
     @parent

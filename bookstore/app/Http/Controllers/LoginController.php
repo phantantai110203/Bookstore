@@ -20,6 +20,7 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+         
         ]);
 
         if (Auth::attempt($credentials)) {

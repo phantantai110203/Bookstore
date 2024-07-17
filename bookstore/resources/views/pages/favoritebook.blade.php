@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 
-@section('title', 'Trang chủ')
+@section('title', 'Trang yêu thích')
 
 @section('navbar')
     @parent
@@ -41,7 +41,7 @@
                                             <i class="bi bi-eye-fill"></i>
                                                 </button>
                                     </a>
-                                    
+
                                 </td>
                             @endif
                         </tr>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Đăng Ky</title>
+    <title>Đăng ký</title>
     {{-- <link rel="stylesheet" href="csstaba/css/login.css"> --}}
     <link rel="icon" href="csslogin/images/logo.png" type="image/x-icon">
     <link href="csslogin/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
@@ -28,10 +28,12 @@
         <h2>Đăng ký</h2>
         <form method="post" action="{{ route('register') }}">
             @csrf
-            <input name="name" placeholder="FULL NAME" required="">
-            <input name="email" placeholder="EMAIL" required="">
-            <input name="password" placeholder="PASSWORD" required="">
-            <input name="password" placeholder="CONFIRM PASSWORD" required=""><br>
+            <input name="name" placeholder="Họ tên" required="">
+            <input name="email" placeholder="Email" required="">
+            <input type="password" name="password" placeholder="Mật khẩu" required="">
+            <input type="password" name="password" placeholder="Nhập lại mật khẩu" required=""><br>
+            <input name="phone" placeholder="phone" required="">
+            <input name="address" placeholder="Địa chỉ" required=""><br>
             <ul class="agileinfotickwthree">
                 <li>
                     <input type="checkbox" id="brand1" value="">
