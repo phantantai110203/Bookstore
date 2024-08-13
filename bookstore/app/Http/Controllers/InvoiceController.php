@@ -128,7 +128,7 @@ class InvoiceController extends Controller
     {
         $userId = Auth::id();
 
-       
+
         $invoices = Invoice::where('user_id', $userId)
             ->with('invoicedetails.book')
             ->orderBy('created_at', 'desc')

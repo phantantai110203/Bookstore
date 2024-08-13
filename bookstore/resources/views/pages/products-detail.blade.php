@@ -23,7 +23,7 @@
                         </h4>
 
                         <div class="mb-3">
-                            <span class="h5">{{ $book->price }}</span>
+                            <span class="h5">{{ number_format($book->price) }}</span>
                             <span class="text-muted">/VND</span>
                         </div>
 
@@ -109,7 +109,8 @@
                                                         @endif
                                                     @endforeach
                                                 </a>
-                                                <strong class="text-dark"> {{ $p->price }}</strong>
+                                                <strong class="text-dark"> {{ number_format($p->price) }}</strong>
+                                                <span class="text-muted">VND</span>
                                             </div>
                                         </div>
                                     </div>
@@ -241,6 +242,6 @@
             e.preventDefault();
             alert('Thêm sản phẩm');
         }
-    </script>   
+    </script>
 
 @endsection
